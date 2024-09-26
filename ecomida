@@ -16,21 +16,21 @@ CREATE TABLE usuario (
 COMMENT ON COLUMN usuario.vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
  create table barraquinha (
- id_barraquinha int not null primary key,
- id_usuario int,
- nome_barraquinha varchar (150), 
- telefone_barraquinha varchar(14),
- realiza_entrega BOOLEAN,
- pontos_de_encontro varchar (500),
- preço_entrega decimal,
- funcionamento_diadasemana BOOLEAN,
- funcionamento_fds BOOLEAN,
- foreign key (id_usuario) references usuario(id_usuario)
+    id_barraquinha int not null primary key,
+    id_usuario int,
+    nome_barraquinha varchar (150), 
+    telefone_barraquinha varchar(14),
+    realiza_entrega BOOLEAN,
+    pontos_de_encontro varchar (500),
+    preço_entrega decimal,
+    funcionamento_diadasemana BOOLEAN,
+    funcionamento_fds BOOLEAN,
+    foreign key (id_usuario) references usuario(id_usuario)
  );
 
 
 create table feirinhas (
-id_feirinhas int not null primary key
+    id_feirinhas int not null primary key
 );
 
 
@@ -72,17 +72,17 @@ CREATE TABLE alimento (
  );
 
 create table produto(
-id_produto int not null primary key ,
-id_alimento int,
-id_barraquinha int,
-nome_produto varchar (100) not null,
-descrição_produto varchar (255) not null,
-data_validade date,
-unidade int,
-preço decimal,  
-exibir BOOLEAN,   
-foreign key (id_barraquinha) references barraquinha (id_barraquinha),
-foreign key (id_alimento) references alimento(id_alimento)
+    id_produto int not null primary key ,
+    id_alimento int,
+    id_barraquinha int,
+    nome_produto varchar (100) not null,
+    descrição_produto varchar (255) not null,
+    data_validade date,
+    unidade int,
+    preço decimal,  
+    exibir BOOLEAN,   
+    foreign key (id_barraquinha) references barraquinha (id_barraquinha),
+    foreign key (id_alimento) references alimento(id_alimento)
 );
 
 CREATE TABLE imagens (
@@ -134,19 +134,17 @@ create table ecomidamarket(
 );
 
 
-
-
  create table endereco (
- id_endereco int not null primary key ,
- id_usuario  int,
- cidade varchar (50) not null,
- bairro varchar (150) not null,
- rua varchar (150) not null,
- numero int,
- complemento varchar (150) not null,
- cep varchar (9),
- estado varchar (256),
-foreign key (id_usuario) references usuario(id_usuario)
+    id_endereco int not null primary key ,
+    id_usuario  int,
+    cidade varchar (50) not null,
+    bairro varchar (150) not null,
+    rua varchar (150) not null,
+    numero int,
+    complemento varchar (150) not null,
+    cep varchar (9),
+    estado varchar (256),
+    foreign key (id_usuario) references usuario(id_usuario)
  );
  
 CREATE TABLE avaliacoes (
@@ -208,10 +206,10 @@ CREATE TABLE suporte (
 );
  
  create table favoritos(
-        id_usuario int,
-        id_produto int,
-        foreign key (id_usuario) references usuario (id_usuario),
-        foreign key (id_produto) references produto (id_produto)
+    id_usuario int,
+    id_produto int,
+    foreign key (id_usuario) references usuario (id_usuario),
+    foreign key (id_produto) references produto (id_produto)
  );
 
  
@@ -299,19 +297,23 @@ CREATE TABLE propriedade (
 );
 
 CREATE TABLE correcao_estoque (
- id_correcao INT PRIMARY KEY,
- id_usuario INT NOT NULL,
- id_barraquinha INT NOT NULL,
- data_insercao DATE,
- hora_insercao TIMESTAMP,
- data_alteracao DATE,
- hora_alteracao TIMESTAMP,
- FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
- FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)  	
+    id_correcao INT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_barraquinha INT NOT NULL,
+    data_insercao DATE,
+    hora_insercao TIMESTAMP,
+    data_alteracao DATE,
+    hora_alteracao TIMESTAMP,
+    FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)  	
 );
 
 CREATE TABLE documentos_educativos(
- id_doceducativo INT PRIMARY KEY
+    id_doceducativo INT PRIMARY KEY,
+    autor_doc VARCHAR (256),
+    foto_capa VARCHAR (256),
+    data_criacao DATE,
+    tipo_documento VARCHAR (256)
 );
 
 CREATE TABLE tipos_documentos(
