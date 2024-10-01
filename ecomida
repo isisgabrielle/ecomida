@@ -56,10 +56,11 @@ CREATE TABLE alimento (
     selo_inspecao BOOLEAN,
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica),
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular),
-    CONSTRAINT chk_classificacao_alimento CHECK (classificacao_alimento IN ('Natural', 'Minimamente Processado', 'Processado'))
+    CONSTRAINT chk_classificacao_alimento CHECK (classificacao_alimento IN ('N', 'MP', 'P'))
 );
+COMMENT ON COLUMN alimento.classificacao_alimento IS 'N significa Natural, MP significa Minimamente Processado, P significa Processado.';
 
-  create table subcategoria_popular(
+create table subcategoria_popular(
     id_subcategoria INT NOT NULL PRIMARY KEY,
     id_categoriapopular INT,
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular)
@@ -175,8 +176,9 @@ CREATE TABLE chat (
     data_envio DATE,
     tipo_remetente VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
-    CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('consumidor', 'vendedor', 'administrador'))
+    CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('C', 'A', 'ADM'))
 );
+COMMENT ON COLUMN chat.tipo_remetente IS 'C significa consumidor, A significa agricultor, ADM significa administrador.';
 
 CREATE TABLE suporte (
     id_suporte INT NOT NULL PRIMARY KEY,
@@ -262,8 +264,9 @@ CREATE TABLE medidas_caseiras (
     nome VARCHAR(50) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
     medida_padrao_equivalente VARCHAR(20) NOT NULL,
-    CONSTRAINT chk_tipo_medida CHECK (tipo IN ('peso', 'volume', 'contagem', 'area'))
+    CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
+COMMENT ON COLUMN usuario.vinculo IS 'P significa peso, Vol significa volume, CONT significa contagem, A siginifica área.';
 CREATE TABLE beneficiamento (
     id_beneficiamento INT PRIMARY KEY,
     id_barraquinha INT,
