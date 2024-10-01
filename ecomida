@@ -1,4 +1,9 @@
-
+CREATE SEQUENCE usuarioid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 CREATE TABLE usuario (
     id_usuario INT NOT NULL PRIMARY KEY,
@@ -15,6 +20,13 @@ CREATE TABLE usuario (
 
 COMMENT ON COLUMN usuario.vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
+CREATE SEQUENCE barraquinhaid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
  create table barraquinha (
     id_barraquinha int not null primary key,
     id_usuario int,
@@ -28,21 +40,45 @@ COMMENT ON COLUMN usuario.vinculo IS 'CON significa consumidor, AGR significa ag
     foreign key (id_usuario) references usuario(id_usuario)
  );
 
+CREATE SEQUENCE feirinhasid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 create table feirinhas (
     id_feirinhas int not null primary key
 );
 
+CREATE SEQUENCE categoriapopularid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 create table categoria_popular(
     id_categoriapopular int not null primary key ,
     nome_categoria varchar (256) not null
  );
-
+CREATE SEQUENCE categoriacientificaid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
  create table categoria_cientifica(
     id_categoriacientifica int not null primary key ,
     nome_categoria varchar (256) not null
  );
+ 
+CREATE SEQUENCE alimentoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 CREATE TABLE alimento (
     id_alimento INT NOT NULL PRIMARY KEY,
@@ -60,17 +96,38 @@ CREATE TABLE alimento (
 );
 COMMENT ON COLUMN alimento.classificacao_alimento IS 'N significa Natural, MP significa Minimamente Processado, P significa Processado.';
 
+CREATE SEQUENCE subcategoriaid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 create table subcategoria_popular(
     id_subcategoria INT NOT NULL PRIMARY KEY,
     id_categoriapopular INT,
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular)
  );
 
+CREATE SEQUENCE subcategoriacientificaid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
  CREATE TABLE subcategoria_cientifica (
     id_subcategoriacientifica int PRIMARY KEY,
     id_categoriacientifica INT,
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica)
  );
+ 
+CREATE SEQUENCE produtoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 create table produto(
     id_produto int not null primary key ,
@@ -86,6 +143,13 @@ create table produto(
     foreign key (id_alimento) references alimento(id_alimento)
 );
 
+CREATE SEQUENCE imagemid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE imagens (
     id_imagem INT PRIMARY KEY,
     nome_imagem VARCHAR(255),
@@ -97,6 +161,13 @@ CREATE TABLE imagens (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
  );
+ 
+CREATE SEQUENCE pedidosid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 CREATE TABLE pedidos (
     id_pedidos INT NOT NULL PRIMARY KEY,
@@ -113,6 +184,12 @@ CREATE TABLE pedidos (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     CONSTRAINT chk_situacao CHECK (situacao IN ('em analise', 'aceito', 'pronto para retirar', 'em transito', 'entregue', 'cancelado'))
 );
+CREATE SEQUENCE promocoesid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 create table promocoes(
     id_promocoes int not null primary key,
@@ -122,6 +199,13 @@ create table promocoes(
     foreign key (id_barraquinha) references barraquinha(id_barraquinha),
     foreign key (id_produto) references produto(id_produto)
 );
+
+CREATE SEQUENCE ecomidamarketid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 create table ecomidamarket(
     id_destaque int not null primary key,
@@ -134,6 +218,12 @@ create table ecomidamarket(
     foreign key (id_barraquinha) references barraquinha(id_barraquinha)
 );
 
+CREATE SEQUENCE enderecoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
  create table endereco (
     id_endereco int not null primary key ,
@@ -147,6 +237,13 @@ create table ecomidamarket(
     estado varchar (256),
     foreign key (id_usuario) references usuario(id_usuario)
  );
+
+CREATE SEQUENCE avaliacaoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
  
 CREATE TABLE avaliacoes (
     id_avaliacao INT NOT NULL PRIMARY KEY,
@@ -158,6 +255,12 @@ CREATE TABLE avaliacoes (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
 );
+CREATE SEQUENCE horariofuncionamentoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
  
 create table horario_funcionamento (
     id_horariofuncionamento int not null primary key,
@@ -169,6 +272,14 @@ create table horario_funcionamento (
     foreign key (id_barraquinha) references barraquinha(id_barraquinha)
 );
 
+
+CREATE SEQUENCE chatid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE chat (
     id_chat INT NOT NULL PRIMARY KEY,
     id_pedidos INT,
@@ -179,6 +290,14 @@ CREATE TABLE chat (
     CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('C', 'A', 'ADM'))
 );
 COMMENT ON COLUMN chat.tipo_remetente IS 'C significa consumidor, A significa agricultor, ADM significa administrador.';
+
+
+CREATE SEQUENCE suporteid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 CREATE TABLE suporte (
     id_suporte INT NOT NULL PRIMARY KEY,
@@ -206,15 +325,29 @@ CREATE TABLE suporte (
         )
     )
 );
- 
+
+CREATE SEQUENCE favoritosid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
  create table favoritos(
+ 	id_favoritos int not null primary key,
     id_usuario int,
     id_produto int,
     foreign key (id_usuario) references usuario (id_usuario),
     foreign key (id_produto) references produto (id_produto)
  );
 
- 
+CREATE SEQUENCE produtospedidosid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 create table produtos_pedidos(
 	id_produtospedidos INT NOT NULL PRIMARY KEY,
     id_produto int,
@@ -228,6 +361,13 @@ create table produtos_pedidos(
     foreign key (id_pedidos) references pedidos(id_pedidos)
  );
 
+CREATE SEQUENCE estoqueid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 create table estoque(
     id_estoque INT PRIMARY KEY,
     id_produto INT,
@@ -238,6 +378,12 @@ create table estoque(
     foreign key (id_barraquinha) references barraquinha(id_barraquinha)
  );
    
+CREATE SEQUENCE cadastro_agricultorid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
  CREATE TABLE cadastro_agricultor (
     id_cadastro_agricultor INT PRIMARY KEY,  
@@ -247,6 +393,13 @@ create table estoque(
     FOREIGN KEY (id_agricultor) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_assistente_social) REFERENCES usuario(id_usuario)
 );
+
+CREATE SEQUENCE visitaid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 	
 CREATE TABLE visitacao (
     id_visita INT PRIMARY KEY,
@@ -259,6 +412,14 @@ CREATE TABLE visitacao (
     certificacoes TEXT,        
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha)
 );
+
+CREATE SEQUENCE medidas_caseirasid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE medidas_caseiras (
     id_medidas_caseiras INT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
@@ -267,6 +428,14 @@ CREATE TABLE medidas_caseiras (
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
 COMMENT ON COLUMN usuario.vinculo IS 'P significa peso, Vol significa volume, CONT significa contagem, A siginifica área.';
+
+CREATE SEQUENCE beneficiamentoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE beneficiamento (
     id_beneficiamento INT PRIMARY KEY,
     id_barraquinha INT,
@@ -279,12 +448,28 @@ CREATE TABLE beneficiamento (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)  	
 );
+
+CREATE SEQUENCE documentoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE documentos (
     id_documento INT PRIMARY KEY,
     nome_documento VARCHAR (300),
     data_emisao DATE,
     data_validade DATE
 );
+
+CREATE SEQUENCE propriedadeid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE propriedade (
     id_propriedade INT PRIMARY KEY,              
     id_cadastro_agricultor INT NOT NULL,              
@@ -299,6 +484,13 @@ CREATE TABLE propriedade (
     CHECK (longitude BETWEEN -180 AND 180)            
 );
 
+CREATE SEQUENCE correcaoestoqueid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
+
 CREATE TABLE correcao_estoque (
     id_correcao INT PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -310,6 +502,13 @@ CREATE TABLE correcao_estoque (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)  	
 );
+
+CREATE SEQUENCE doceducativoid_seq
+AS integer
+INCREMENT 1
+MINVALUE 1
+MAXVALUE 999999999
+START 1;
 
 CREATE TABLE documentos_educativos(
     id_doceducativo INT PRIMARY KEY,
