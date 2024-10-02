@@ -1,9 +1,9 @@
 CREATE SEQUENCE usuarioid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE usuario (
     id_usuario INT NOT NULL PRIMARY KEY,
@@ -21,11 +21,11 @@ CREATE TABLE usuario (
 COMMENT ON COLUMN usuario.vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE SEQUENCE barraquinhaid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
  create table barraquinha (
     id_barraquinha int not null primary key,
@@ -41,44 +41,48 @@ START 1;
  );
 
 CREATE SEQUENCE feirinhasid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table feirinhas (
-    id_feirinhas int not null primary key
+    id_feirinhas int not null primary key,
+	nome_feirinhas varchar (256) not null,
+	dias_abertura varchar (256)
 );
 
 CREATE SEQUENCE categoriapopularid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table categoria_popular(
     id_categoriapopular int not null primary key ,
     nome_categoria varchar (256) not null
  );
+ 
 CREATE SEQUENCE categoriacientificaid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
- create table categoria_cientifica(
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+
+create table categoria_cientifica(
     id_categoriacientifica int not null primary key ,
     nome_categoria varchar (256) not null
  );
  
 CREATE SEQUENCE alimentoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE alimento (
     id_alimento INT NOT NULL PRIMARY KEY,
@@ -97,37 +101,39 @@ CREATE TABLE alimento (
 COMMENT ON COLUMN alimento.classificacao_alimento IS 'N significa Natural, MP significa Minimamente Processado, P significa Processado.';
 
 CREATE SEQUENCE subcategoriaid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table subcategoria_popular(
     id_subcategoria INT NOT NULL PRIMARY KEY,
     id_categoriapopular INT,
+	nome_sub varchar (256),
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular)
  );
 
 CREATE SEQUENCE subcategoriacientificaid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
  CREATE TABLE subcategoria_cientifica (
     id_subcategoriacientifica int PRIMARY KEY,
     id_categoriacientifica INT,
+	nome_cientifica varchar (256),
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica)
  );
  
 CREATE SEQUENCE produtoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table produto(
     id_produto int not null primary key ,
@@ -144,11 +150,11 @@ create table produto(
 );
 
 CREATE SEQUENCE imagemid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE imagens (
     id_imagem INT PRIMARY KEY,
@@ -163,11 +169,11 @@ CREATE TABLE imagens (
  );
  
 CREATE SEQUENCE pedidosid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE pedidos (
     id_pedidos INT NOT NULL PRIMARY KEY,
@@ -185,11 +191,11 @@ CREATE TABLE pedidos (
     CONSTRAINT chk_situacao CHECK (situacao IN ('em analise', 'aceito', 'pronto para retirar', 'em transito', 'entregue', 'cancelado'))
 );
 CREATE SEQUENCE promocoesid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table promocoes(
     id_promocoes int not null primary key,
@@ -201,11 +207,11 @@ create table promocoes(
 );
 
 CREATE SEQUENCE ecomidamarketid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table ecomidamarket(
     id_destaque int not null primary key,
@@ -219,11 +225,11 @@ create table ecomidamarket(
 );
 
 CREATE SEQUENCE enderecoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
  create table endereco (
     id_endereco int not null primary key ,
@@ -239,12 +245,12 @@ START 1;
  );
 
 CREATE SEQUENCE avaliacaoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
- 
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+	 
 CREATE TABLE avaliacoes (
     id_avaliacao INT NOT NULL PRIMARY KEY,
     id_pedidos INT,
@@ -256,12 +262,12 @@ CREATE TABLE avaliacoes (
     CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
 );
 CREATE SEQUENCE horariofuncionamentoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
- 
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+	 
 create table horario_funcionamento (
     id_horariofuncionamento int not null primary key,
     abertura time not null,
@@ -274,11 +280,11 @@ create table horario_funcionamento (
 
 
 CREATE SEQUENCE chatid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE chat (
     id_chat INT NOT NULL PRIMARY KEY,
@@ -293,11 +299,11 @@ COMMENT ON COLUMN chat.tipo_remetente IS 'C significa consumidor, A significa ag
 
 
 CREATE SEQUENCE suporteid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE suporte (
     id_suporte INT NOT NULL PRIMARY KEY,
@@ -327,11 +333,11 @@ CREATE TABLE suporte (
 );
 
 CREATE SEQUENCE favoritosid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
  create table favoritos(
  	id_favoritos int not null primary key,
@@ -342,11 +348,11 @@ START 1;
  );
 
 CREATE SEQUENCE produtospedidosid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table produtos_pedidos(
 	id_produtospedidos INT NOT NULL PRIMARY KEY,
@@ -362,11 +368,11 @@ create table produtos_pedidos(
  );
 
 CREATE SEQUENCE estoqueid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 create table estoque(
     id_estoque INT PRIMARY KEY,
@@ -379,11 +385,11 @@ create table estoque(
  );
    
 CREATE SEQUENCE cadastro_agricultorid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
  CREATE TABLE cadastro_agricultor (
     id_cadastro_agricultor INT PRIMARY KEY,  
@@ -395,12 +401,12 @@ START 1;
 );
 
 CREATE SEQUENCE visitaid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
-	
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+		
 CREATE TABLE visitacao (
     id_visita INT PRIMARY KEY,
     nome_propriedade varchar(256),
@@ -414,11 +420,11 @@ CREATE TABLE visitacao (
 );
 
 CREATE SEQUENCE medidas_caseirasid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE medidas_caseiras (
     id_medidas_caseiras INT PRIMARY KEY,
@@ -430,11 +436,11 @@ CREATE TABLE medidas_caseiras (
 COMMENT ON COLUMN usuario.vinculo IS 'P significa peso, Vol significa volume, CONT significa contagem, A siginifica área.';
 
 CREATE SEQUENCE beneficiamentoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE beneficiamento (
     id_beneficiamento INT PRIMARY KEY,
@@ -450,11 +456,11 @@ CREATE TABLE beneficiamento (
 );
 
 CREATE SEQUENCE documentoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE documentos (
     id_documento INT PRIMARY KEY,
@@ -464,11 +470,11 @@ CREATE TABLE documentos (
 );
 
 CREATE SEQUENCE propriedadeid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE propriedade (
     id_propriedade INT PRIMARY KEY,              
@@ -485,11 +491,11 @@ CREATE TABLE propriedade (
 );
 
 CREATE SEQUENCE correcaoestoqueid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE correcao_estoque (
     id_correcao INT PRIMARY KEY,
@@ -504,11 +510,11 @@ CREATE TABLE correcao_estoque (
 );
 
 CREATE SEQUENCE doceducativoid_seq
-AS integer
-INCREMENT 1
-MINVALUE 1
-MAXVALUE 999999999
-START 1;
+	AS integer
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
 
 CREATE TABLE documentos_educativos(
     id_doceducativo INT PRIMARY KEY,
@@ -526,4 +532,40 @@ CREATE TABLE Conteudos_interface(
 
 );
 	
+INSERT INTO usuario (id_usuario, nome, email, telefone, vinculo, documento, possui_registro, registro_organico, penalidades) 
+VALUES 
+    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901', true, 'ORG123', 0),
+    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100', false, null, 1);
 
+INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preço_entrega, funcionamento_diadasemana, funcionamento_fds) 
+VALUES 
+    (nextval('barraquinhaid_seq'), currval('usuarioid_seq'), 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
+
+INSERT INTO feirinhas (id_feirinhas, nome_feirinhas, dias_abertura)
+VALUES 
+	(nextval('feirinhasid_seq'), 'Feirinha do Mercado Central', 'Terça, Quinta, Sábado'),
+	(nextval('feirinhasid_seq'), 'Feirinha da Praia', 'Domingo, Segunda');
+
+INSERT INTO categoria_popular (id_categoriapopular, nome_categoria)
+VALUES (nextval('categoriapopularid_seq'), 'Frutas'),
+	   (nextval('categoriapopularid_seq'), 'Verduras'),
+	   (nextval('categoriapopularid_seq'), 'Laticínios');
+	   
+INSERT INTO categoria_cientifica (id_categoriacientifica, nome_categoria)
+VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
+       (nextval('categoriacientificaid_seq'), 'Proteico'),
+	   (nextval('categoriacientificaid_seq'), 'Energético');
+
+INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_categoriacientifica, classificacao_alimento, composicao_nutricional, alimento_regional, informacoes_educativas, selo_inspecao)
+VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'N', 'Vitamina C, fibra', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
+	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2, 'P', 'Proteína, cálcio', TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
+       
+
+select * from usuario; 
+select * from barraquinha;
+select * from feirinhas;
+select * from categoria_popular;
+select * from categoria_cientifica;
+select * from alimento;
+ 	
+	
