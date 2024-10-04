@@ -12,16 +12,47 @@ CREATE TABLE usuario (
     telefone CHAR(11) NOT NULL,
     tipo_vinculo CHAR(3) NOT NULL,
     documento VARCHAR (14) NOT NULL,
-    penalidades INT DEFAULT 0,
 	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT chk_telefone CHECK (LENGTH(telefone) = 11 AND telefone ~ '^[0-9]+$'),
     CONSTRAINT chk_vinculo CHECK (LENGTH (tipo_vinculo) = 3 AND tipo_vinculo IN ('CON', 'AGR', 'ADM', 'ASS')),
-	CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$'),
-	CONSTRAINT chk_penalidades CHECK (penalidades >= 0)
+	CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$')
+
 );
 
 COMMENT ON COLUMN usuario.telefone IS 'O check para telefone faz com que o banco aceite apenas numeros como entrada, e receba apenas 11 caracteres.';
 COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
+
+CREATE SEQUENCE tipopenalidadeid_seq
+    AS integer
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    START 1;
+
+CREATE TABLE tipos_de_penalidade (
+    id_tipo_penalidade INT NOT NULL PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    gravidade INT NOT NULL CHECK (gravidade BETWEEN 1 AND 5) 
+);
+COMMENT ON COLUMN tipos_de_penalidade.gravidade IS ' vai checar qual é o nivel da gravidade se vai de um ate 5';
+
+CREATE SEQUENCE penalidadeid_seq
+    AS integer
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    START 1;
+	
+CREATE TABLE penalidades (
+    id_penalidade INT NOT NULL PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_tipo_penalidade INT NOT NULL,
+    data_penalidade DATE NOT NULL,
+    descricao VARCHAR(255),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_tipo_penalidade) REFERENCES tipos_de_penalidade(id_tipo_penalidade)
+);
+
 
 CREATE SEQUENCE barraquinhaid_seq
 	AS integer
@@ -241,7 +272,7 @@ CREATE SEQUENCE enderecoid_seq
     bairro varchar (150) not null,
     rua varchar (150) not null,
     numero int not null,
-    complemento varchar (150) not null,
+    complemento varchar (150),
     cep varchar (9) not null,
     estado varchar (256) not null,
     foreign key (id_usuario) references usuario(id_usuario)
@@ -564,10 +595,10 @@ CREATE TABLE Conteudos_interface(
 
 );
 	
-INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento, penalidades) 
+INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento) 
 VALUES 
-    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901', 0),
-    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100', 1);
+    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901'),
+    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100');
 
 INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preço_entrega, funcionamento_diadasemana, funcionamento_fds) 
 VALUES 
