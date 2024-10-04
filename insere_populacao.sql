@@ -22,3 +22,10 @@ INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_catego
 VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', 'Vitamina C, fibra', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
 	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2, 'PR', 'Proteína, cálcio', TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
        
+
+select * from usuario; 
+select * from barraquinha;
+select * from feirinhas;
+select * from categoria_popular;
+select * from categoria_cientifica;
+select * from alimento;
