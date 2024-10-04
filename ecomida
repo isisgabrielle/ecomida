@@ -7,16 +7,21 @@ CREATE SEQUENCE usuarioid_seq
 
 CREATE TABLE usuario (
     id_usuario INT NOT NULL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL,
-    email VARCHAR(256) NOT NULL,
-    telefone VARCHAR(14) NOT NULL,
-    vinculo VARCHAR(3) NOT NULL,
+    nome VARCHAR(256) NOT NULL,
+    email VARCHAR(254) NOT NULL,
+    telefone CHAR(11) NOT NULL,
+    tipo_vinculo CHAR(3) NOT NULL,
     documento VARCHAR (14) NOT NULL,
-    penalidades INT,
-    CONSTRAINT chk_vinculo CHECK (vinculo IN ('CON', 'AGR', 'ADM', 'ASS'))
+    penalidades INT DEFAULT 0,
+	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT chk_telefone CHECK (LENGTH(telefone) = 11 AND telefone ~ '^[0-9]+$'),
+    CONSTRAINT chk_vinculo CHECK (LENGTH (tipo_vinculo) = 3 AND tipo_vinculo IN ('CON', 'AGR', 'ADM', 'ASS')),
+	CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$'),
+	CONSTRAINT chk_penalidades CHECK (penalidades >= 0)
 );
 
-COMMENT ON COLUMN usuario.vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
+COMMENT ON COLUMN usuario.telefone IS 'O check para telefone faz com que o banco aceite apenas numeros como entrada, e receba apenas 11 caracteres.';
+COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE SEQUENCE barraquinhaid_seq
 	AS integer
@@ -440,7 +445,7 @@ CREATE TABLE medidas_caseiras (
     FOREIGN KEY (id_medida_padrao) REFERENCES medidas_padrao(id_medida_padrao),
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
-COMMENT ON COLUMN usuario.vinculo IS 'P significa peso, Vol significa volume, CONT significa contagem, A siginifica área.';
+COMMENT ON COLUMN medidas_caseiras.tipo IS 'P significa peso, Vol significa volume, CONT significa contagem, A siginifica área.';
 
 CREATE SEQUENCE beneficiamentoid_seq
 	AS integer
@@ -559,7 +564,7 @@ CREATE TABLE Conteudos_interface(
 
 );
 	
-INSERT INTO usuario (id_usuario, nome, email, telefone, vinculo, documento, penalidades) 
+INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento, penalidades) 
 VALUES 
     (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901', 0),
     (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100', 1);
@@ -594,5 +599,3 @@ select * from feirinhas;
 select * from categoria_popular;
 select * from categoria_cientifica;
 select * from alimento;
- 	
-	
