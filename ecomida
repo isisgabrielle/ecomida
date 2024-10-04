@@ -75,7 +75,7 @@ CREATE SEQUENCE produtoid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE imagemid_seq
+CREATE SEQUENCE imagensid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -110,7 +110,7 @@ CREATE SEQUENCE enderecoid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE avaliacaoid_seq
+CREATE SEQUENCE avaliacoesid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -353,13 +353,17 @@ CREATE TABLE produto (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha)
 );
 
-CREATE TABLE imagem (
-    id_imagem BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('imagemid_seq'),
+CREATE TABLE imagens (
+    id_imagem BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('imagensid_seq'),
+    nome_imagem VARCHAR(255) NOT NULL,
+    dados_imagem VARCHAR (255) NOT NULL,
+    id_usuario BIGINT NOT NULL,
+    id_barraquinha BIGINT NOT NULL,
     id_produto BIGINT NOT NULL,
-    url_imagem VARCHAR(500) NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
-);
+ );
 
 CREATE TABLE pedidos (
     id_pedidos BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('pedidosid_seq'),
@@ -403,15 +407,15 @@ CREATE TABLE endereco (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE avaliacao (
-    id_avaliacao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacaoid_seq'),
+CREATE TABLE avaliacoes (
+    id_avaliacoes BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacoesid_seq'),
+  	id_pedidos BIGINT NOT NULL,
     id_usuario BIGINT NOT NULL,
-    id_produto BIGINT NOT NULL,
-    nota INT NOT NULL CHECK (nota BETWEEN 1 AND 5),
-    comentario VARCHAR(255),
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    avaliacao_barraquinha VARCHAR(1) NOT NULL,
+    data_avaliacao DATE,
+    FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
+    CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
 );
 
 CREATE TABLE horario_funcionamento (
@@ -654,3 +658,4 @@ select * from feirinhas;
 select * from categoria_popular;
 select * from categoria_cientifica;
 select * from alimento;
+
