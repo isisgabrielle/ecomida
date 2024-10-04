@@ -75,7 +75,7 @@ CREATE SEQUENCE produtoid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE imagemid_seq
+CREATE SEQUENCE imagensid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -110,7 +110,7 @@ CREATE SEQUENCE enderecoid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE avaliacaoid_seq
+CREATE SEQUENCE avaliacoesid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -353,13 +353,17 @@ CREATE TABLE produto (
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha)
 );
 
-CREATE TABLE imagem (
-    id_imagem BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('imagemid_seq'),
+CREATE TABLE imagens (
+    id_imagem BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('imagensid_seq'),
+    nome_imagem VARCHAR(255) NOT NULL,
+    dados_imagem VARCHAR (255) NOT NULL,
+    id_usuario BIGINT NOT NULL,
+    id_barraquinha BIGINT NOT NULL,
     id_produto BIGINT NOT NULL,
-    url_imagem VARCHAR(500) NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
-);
+ );
 
 CREATE TABLE pedidos (
     id_pedidos BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('pedidosid_seq'),
@@ -403,15 +407,15 @@ CREATE TABLE endereco (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
-CREATE TABLE avaliacao (
-    id_avaliacao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacaoid_seq'),
+CREATE TABLE avaliacoes (
+    id_avaliacoes BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacoesid_seq'),
+  	id_pedidos BIGINT NOT NULL,
     id_usuario BIGINT NOT NULL,
-    id_produto BIGINT NOT NULL,
-    nota INT NOT NULL CHECK (nota BETWEEN 1 AND 5),
-    comentario VARCHAR(255),
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    avaliacao_barraquinha VARCHAR(1) NOT NULL,
+    data_avaliacao DATE,
+    FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
+    CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
 );
 
 CREATE TABLE horario_funcionamento (
@@ -622,35 +626,3 @@ CREATE TABLE Conteudos_interface (
     id_conteudo BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('conteudo_seq'),
     titulo VARCHAR(256) NOT NULL   
 );
-
-INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento) 
-VALUES 
-    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901'),
-    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100');
-
-INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preco_entrega, funcionamento_diadasemana, funcionamento_fds) 
-VALUES 
-    (nextval('barraquinhaid_seq'), currval('usuarioid_seq'), 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
-
-
-INSERT INTO categoria_popular (id_categoriapopular, nome_categoria)
-VALUES (nextval('categoriapopularid_seq'), 'Frutas'),
-	   (nextval('categoriapopularid_seq'), 'Verduras'),
-	   (nextval('categoriapopularid_seq'), 'Laticínios');
-	   
-INSERT INTO categoria_cientifica (id_categoriacientifica, nome_categoria)
-VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
-       (nextval('categoriacientificaid_seq'), 'Proteico'),
-	   (nextval('categoriacientificaid_seq'), 'Energético');
-
-INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_categoriacientifica, classificacao_alimento, composicao_nutricional, alimento_regional, informacoes_educativas, selo_inspecao)
-VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', 'Vitamina C, fibra', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
-	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2, 'PR', 'Proteína, cálcio', TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
-       
-
-select * from usuario; 
-select * from barraquinha;
-select * from feirinhas;
-select * from categoria_popular;
-select * from categoria_cientifica;
-select * from alimento;
