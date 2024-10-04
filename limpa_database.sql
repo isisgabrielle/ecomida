@@ -1,4 +1,5 @@
 TRUNCATE TABLE 
+	Conteudos_interface,
     penalidades,
 	chat,
     suporte,
@@ -34,13 +35,16 @@ TRUNCATE TABLE
     usuario;
 
 ALTER SEQUENCE usuarioid_seq RESTART WITH 1;
+ALTER SEQUENCE medidas_caseirasid_seq RESTART WITH 1;
+ALTER SEQUENCE medida_padraoid_seq RESTART WITH 1;
 ALTER SEQUENCE tipopenalidadeid_seq RESTART WITH 1;
-ALTER SEQUENCE penalidadeid_seq RESTART WITH 1;
+ALTER SEQUENCE penalidadesid_seq RESTART WITH 1;
 ALTER SEQUENCE barraquinhaid_seq RESTART WITH 1;
 ALTER SEQUENCE feirinhasid_seq RESTART WITH 1;
 ALTER SEQUENCE categoriapopularid_seq RESTART WITH 1;
 ALTER SEQUENCE categoriacientificaid_seq RESTART WITH 1;
 ALTER SEQUENCE alimentoid_seq RESTART WITH 1;
+ALTER SEQUENCE doceducativoid_seq RESTART WITH 1;
 ALTER SEQUENCE subcategoriaid_seq RESTART WITH 1;
 ALTER SEQUENCE subcategoriacientificaid_seq RESTART WITH 1;
 ALTER SEQUENCE produtoid_seq RESTART WITH 1;
@@ -62,3 +66,5 @@ ALTER SEQUENCE documentoid_seq RESTART WITH 1;
 ALTER SEQUENCE propriedadeid_seq RESTART WITH 1;
 ALTER SEQUENCE visitaid_seq RESTART WITH 1;
 ALTER SEQUENCE correcaoestoqueid_seq RESTART WITH 1;
+ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
+ALTER SEQUENCE conteudo_seq RESTART WITH 1;
