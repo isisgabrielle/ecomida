@@ -12,7 +12,7 @@ CREATE SEQUENCE tipopenalidadeid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE penalidadeid_seq
+CREATE SEQUENCE penalidadesid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -180,6 +180,13 @@ CREATE SEQUENCE medidas_caseirasid_seq
 	MAXVALUE 999999999
 	START 1;
 
+CREATE SEQUENCE medida_padraoid_seq
+	AS INTEGER
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+
 CREATE SEQUENCE beneficiamentoid_seq
 	AS INTEGER
 	INCREMENT 1
@@ -193,6 +200,14 @@ CREATE SEQUENCE documentoid_seq
 	MINVALUE 1
 	MAXVALUE 999999999
 	START 1;
+
+CREATE SEQUENCE tipodocid_seq
+    AS integer
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    START 1;
+
 
 CREATE SEQUENCE propriedadeid_seq
 	AS INTEGER
@@ -249,7 +264,7 @@ CREATE TABLE tipos_de_penalidade (
 COMMENT ON COLUMN tipos_de_penalidade.gravidade IS 'Vai checar qual é o nível da gravidade se vai de um até 5';
 
 CREATE TABLE penalidades (
-    id_penalidade BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('penalidadeid_seq'),
+    id_penalidades BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('penalidadesid_seq'),
     id_usuario BIGINT NOT NULL,
     id_tipo_penalidade BIGINT NOT NULL,
     data_penalidade DATE NOT NULL,
@@ -523,7 +538,7 @@ CREATE TABLE cadastro_agricultor (
 );
 
 CREATE TABLE medidas_padrao (
-    id_medida_padrao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('medidas_caseirasid_seq'), 
+    id_medida_padrao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('medida_padraoid_seq'), 
     nome VARCHAR(50) NOT NULL,
     unidade_medida VARCHAR(20) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
@@ -559,7 +574,7 @@ CREATE TABLE beneficiamento (
 );
 
 CREATE TABLE tipos_documentos (
-    id_tipoDoc BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('documentoid_seq'),
+    id_tipoDoc BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('tipodocid_seq'),
     nome_tipo VARCHAR(256) NOT NULL
 );
 
@@ -659,3 +674,145 @@ select * from categoria_popular;
 select * from categoria_cientifica;
 select * from alimento;
 
+TRUNCATE TABLE 
+	Conteudos_interface,
+    penalidades,
+	chat,
+    suporte,
+    imagens,
+    produtos_pedidos,
+    estoque,
+    ecomidamarket,
+    pedidos,
+    promocoes,
+    favoritos,
+    avaliacoes,
+    barraquinha,
+    visitacao,
+    correcao_estoque,
+    horario_funcionamento,
+    beneficiamento,
+    cadastro_agricultor,
+    propriedade,
+    documentos,
+    alimento,
+	documentos_educativos,
+    tipos_documentos,
+    tipos_de_penalidade,
+    subcategoria_popular,
+    subcategoria_cientifica,
+    categoria_popular,
+    categoria_cientifica,
+    produto,
+    endereco,
+    feirinhas,
+    medidas_caseiras,
+    medidas_padrao,
+    usuario;
+
+ALTER SEQUENCE usuarioid_seq RESTART WITH 1;
+ALTER SEQUENCE medidas_caseirasid_seq RESTART WITH 1;
+ALTER SEQUENCE medida_padraoid_seq RESTART WITH 1;
+ALTER SEQUENCE tipopenalidadeid_seq RESTART WITH 1;
+ALTER SEQUENCE penalidadesid_seq RESTART WITH 1;
+ALTER SEQUENCE barraquinhaid_seq RESTART WITH 1;
+ALTER SEQUENCE feirinhasid_seq RESTART WITH 1;
+ALTER SEQUENCE categoriapopularid_seq RESTART WITH 1;
+ALTER SEQUENCE categoriacientificaid_seq RESTART WITH 1;
+ALTER SEQUENCE alimentoid_seq RESTART WITH 1;
+ALTER SEQUENCE doceducativoid_seq RESTART WITH 1;
+ALTER SEQUENCE subcategoriaid_seq RESTART WITH 1;
+ALTER SEQUENCE subcategoriacientificaid_seq RESTART WITH 1;
+ALTER SEQUENCE produtoid_seq RESTART WITH 1;
+ALTER SEQUENCE imagensid_seq RESTART WITH 1;
+ALTER SEQUENCE pedidosid_seq RESTART WITH 1;
+ALTER SEQUENCE promocoesid_seq RESTART WITH 1;
+ALTER SEQUENCE ecomidamarketid_seq RESTART WITH 1;
+ALTER SEQUENCE enderecoid_seq RESTART WITH 1;
+ALTER SEQUENCE avaliacoesid_seq RESTART WITH 1;
+ALTER SEQUENCE horariofuncionamentoid_seq RESTART WITH 1;
+ALTER SEQUENCE chatid_seq RESTART WITH 1;
+ALTER SEQUENCE suporteid_seq RESTART WITH 1;
+ALTER SEQUENCE favoritosid_seq RESTART WITH 1;
+ALTER SEQUENCE produtospedidosid_seq RESTART WITH 1;
+ALTER SEQUENCE estoqueid_seq RESTART WITH 1;
+ALTER SEQUENCE cadastro_agricultorid_seq RESTART WITH 1;
+ALTER SEQUENCE beneficiamentoid_seq RESTART WITH 1;
+ALTER SEQUENCE documentoid_seq RESTART WITH 1;
+ALTER SEQUENCE propriedadeid_seq RESTART WITH 1;
+ALTER SEQUENCE visitaid_seq RESTART WITH 1;
+ALTER SEQUENCE correcaoestoqueid_seq RESTART WITH 1;
+ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
+ALTER SEQUENCE conteudo_seq RESTART WITH 1;
+
+
+
+DROP TABLE IF EXISTS Conteudos_interface;
+DROP TABLE IF EXISTS penalidades;
+DROP TABLE IF EXISTS chat;
+DROP TABLE IF EXISTS suporte;
+DROP TABLE IF EXISTS imagens;
+DROP TABLE IF EXISTS produtos_pedidos;
+DROP TABLE IF EXISTS estoque;
+DROP TABLE IF EXISTS ecomidamarket;
+DROP TABLE IF EXISTS promocoes;
+DROP TABLE IF EXISTS favoritos;
+DROP TABLE IF EXISTS avaliacoes;
+DROP TABLE IF EXISTS pedidos;
+DROP TABLE IF EXISTS visitacao; 
+DROP TABLE IF EXISTS correcao_estoque;
+DROP TABLE IF EXISTS horario_funcionamento;
+DROP TABLE IF EXISTS beneficiamento;
+DROP TABLE IF EXISTS propriedade;
+DROP TABLE IF EXISTS cadastro_agricultor;
+DROP TABLE IF EXISTS documentos;
+DROP TABLE IF EXISTS alimento;
+DROP TABLE IF EXISTS documentos_educativos;
+DROP TABLE IF EXISTS tipos_documentos;
+DROP TABLE IF EXISTS tipos_de_penalidade;
+DROP TABLE IF EXISTS produto;
+DROP TABLE IF EXISTS subcategoria_popular;
+DROP TABLE IF EXISTS subcategoria_cientifica;
+DROP TABLE IF EXISTS categoria_popular;
+DROP TABLE IF EXISTS categoria_cientifica;
+DROP TABLE IF EXISTS barraquinha;
+DROP TABLE IF EXISTS endereco;
+DROP TABLE IF EXISTS feirinhas;
+DROP TABLE IF EXISTS medidas_caseiras;
+DROP TABLE IF EXISTS medidas_padrao;
+DROP TABLE IF EXISTS usuario;
+
+DROP SEQUENCE IF EXISTS conteudo_seq;
+DROP SEQUENCE IF EXISTS penalidadesid_seq;
+DROP SEQUENCE IF EXISTS chatid_seq;
+DROP SEQUENCE IF EXISTS suporteid_seq;
+DROP SEQUENCE IF EXISTS imagensid_seq;
+DROP SEQUENCE IF EXISTS produtospedidosid_seq;
+DROP SEQUENCE IF EXISTS estoqueid_seq;
+DROP SEQUENCE IF EXISTS ecomidamarketid_seq;
+DROP SEQUENCE IF EXISTS promocoesid_seq;
+DROP SEQUENCE IF EXISTS favoritosid_seq;
+DROP SEQUENCE IF EXISTS avaliacoesid_seq;
+DROP SEQUENCE IF EXISTS pedidosid_seq;
+DROP SEQUENCE IF EXISTS visitaid_seq;
+DROP SEQUENCE IF EXISTS correcaoestoqueid_seq;
+DROP SEQUENCE IF EXISTS horariofuncionamentoid_seq;
+DROP SEQUENCE IF EXISTS beneficiamentoid_seq;
+DROP SEQUENCE IF EXISTS propriedadeid_seq;
+DROP SEQUENCE IF EXISTS cadastro_agricultorid_seq;
+DROP SEQUENCE IF EXISTS documentoid_seq;
+DROP SEQUENCE IF EXISTS alimentoid_seq;
+DROP SEQUENCE IF EXISTS doceducativoid_seq;
+DROP SEQUENCE IF EXISTS tipodocid_seq;
+DROP SEQUENCE IF EXISTS tipopenalidadeid_seq;
+DROP SEQUENCE IF EXISTS produtoid_seq;
+DROP SEQUENCE IF EXISTS subcategoriaid_seq;
+DROP SEQUENCE IF EXISTS subcategoriacientificaid_seq;
+DROP SEQUENCE IF EXISTS categoriapopularid_seq;
+DROP SEQUENCE IF EXISTS categoriacientificaid_seq;
+DROP SEQUENCE IF EXISTS barraquinhaid_seq;
+DROP SEQUENCE IF EXISTS enderecoid_seq;
+DROP SEQUENCE IF EXISTS feirinhasid_seq;
+DROP SEQUENCE IF EXISTS medidas_caseirasid_seq;
+DROP SEQUENCE IF EXISTS medida_padraoid_seq;
+DROP SEQUENCE IF EXISTS usuarioid_seq;
