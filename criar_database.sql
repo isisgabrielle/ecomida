@@ -12,7 +12,7 @@ CREATE SEQUENCE tipopenalidadeid_seq
     MAXVALUE 999999999
     START 1;
 
-CREATE SEQUENCE penalidadeid_seq
+CREATE SEQUENCE penalidadesid_seq
     AS integer
     INCREMENT 1
     MINVALUE 1
@@ -180,6 +180,13 @@ CREATE SEQUENCE medidas_caseirasid_seq
 	MAXVALUE 999999999
 	START 1;
 
+CREATE SEQUENCE medida_padraoid_seq
+	AS INTEGER
+	INCREMENT 1
+	MINVALUE 1
+	MAXVALUE 999999999
+	START 1;
+
 CREATE SEQUENCE beneficiamentoid_seq
 	AS INTEGER
 	INCREMENT 1
@@ -193,6 +200,14 @@ CREATE SEQUENCE documentoid_seq
 	MINVALUE 1
 	MAXVALUE 999999999
 	START 1;
+
+CREATE SEQUENCE tipodocid_seq
+    AS integer
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    START 1;
+
 
 CREATE SEQUENCE propriedadeid_seq
 	AS INTEGER
@@ -249,7 +264,7 @@ CREATE TABLE tipos_de_penalidade (
 COMMENT ON COLUMN tipos_de_penalidade.gravidade IS 'Vai checar qual é o nível da gravidade se vai de um até 5';
 
 CREATE TABLE penalidades (
-    id_penalidade BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('penalidadeid_seq'),
+    id_penalidades BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('penalidadesid_seq'),
     id_usuario BIGINT NOT NULL,
     id_tipo_penalidade BIGINT NOT NULL,
     data_penalidade DATE NOT NULL,
@@ -523,7 +538,7 @@ CREATE TABLE cadastro_agricultor (
 );
 
 CREATE TABLE medidas_padrao (
-    id_medida_padrao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('medidas_caseirasid_seq'), 
+    id_medida_padrao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('medida_padraoid_seq'), 
     nome VARCHAR(50) NOT NULL,
     unidade_medida VARCHAR(20) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
@@ -559,7 +574,7 @@ CREATE TABLE beneficiamento (
 );
 
 CREATE TABLE tipos_documentos (
-    id_tipoDoc BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('documentoid_seq'),
+    id_tipoDoc BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('tipodocid_seq'),
     nome_tipo VARCHAR(256) NOT NULL
 );
 
