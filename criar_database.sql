@@ -383,11 +383,8 @@ CREATE TABLE imagens (
 CREATE TABLE pedidos (
     id_pedidos BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('pedidosid_seq'),
     id_usuario BIGINT NOT NULL,
-    id_produto BIGINT NOT NULL,
-    quantidade INT NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );
 
 CREATE TABLE promocoes (
