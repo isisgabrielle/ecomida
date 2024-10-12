@@ -649,7 +649,7 @@ VALUES
 
 INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preco_entrega, funcionamento_diadasemana, funcionamento_fds) 
 VALUES 
-    (nextval('barraquinhaid_seq'), currval('usuarioid_seq'), 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
+    (nextval('barraquinhaid_seq'), 2, 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
 
 
 INSERT INTO categoria_popular (id_categoriapopular, nome_categoria)
