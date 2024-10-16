@@ -54,6 +54,13 @@ CREATE SEQUENCE alimentoid_seq
     MAXVALUE 999999999
     START 1;
 
+CREATE SEQUENCE composicaonutricionalid_seq
+    AS integer
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 999999999
+    START 1;
+
 CREATE SEQUENCE subcategoriaid_seq
     AS integer
     INCREMENT 1
@@ -246,12 +253,10 @@ CREATE TABLE usuario (
     tipo_vinculo CHAR(3) NOT NULL,
     documento VARCHAR(14) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_telefone CHECK (LENGTH(telefone) = 11 AND telefone ~ '^[0-9]+$'),
     CONSTRAINT chk_vinculo CHECK (LENGTH(tipo_vinculo) = 3 AND tipo_vinculo IN ('CON', 'AGR', 'ADM', 'ASS')),
     CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$')
 );
 
-COMMENT ON COLUMN usuario.telefone IS 'O check para telefone faz com que o banco aceite apenas números como entrada e receba apenas 11 caracteres.';
 COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE TABLE tipos_de_penalidade (
@@ -325,18 +330,54 @@ CREATE TABLE alimento (
     nome_alimento VARCHAR(100) NOT NULL,
     id_categoriapopular BIGINT NOT NULL,
     id_categoriacientifica BIGINT NOT NULL,
+	id_composicaonutricional BIGINT NOT NULL,
     classificacao_alimento CHAR(2) NOT NULL,
-    composicao_nutricional VARCHAR(500) NOT NULL,
     alimento_regional BOOLEAN NOT NULL,
     informacoes_educativas VARCHAR(400) NOT NULL,
     selo_inspecao BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica),
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular),
+	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional),
     CONSTRAINT chk_classificacao_alimento CHECK (LENGTH(classificacao_alimento) = 2 AND classificacao_alimento IN ('NT', 'MP', 'PR'))
 );
 
 COMMENT ON COLUMN alimento.classificacao_alimento IS 'NT significa Natural, MP significa Minimamente Processado, PR significa Processado.';
+
+CREATE TABLE composicao_nutricional (
+	id_composicaonutricional BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('composicaonutricionalid_seq'),
+	id_alimento BIGINT NOT NULL,
+	umidade DECIMAL(5, 2),
+    energia_kcal DECIMAL(5, 2),
+    energia_kj DECIMAL(5, 2),
+    proteina DECIMAL(5, 2),
+    lipideos DECIMAL(5, 2),
+    colesterol DECIMAL(5, 2),
+    carboidrato DECIMAL(5, 2),
+    fibra DECIMAL(5, 2),
+    cinzas DECIMAL(5, 2),
+    calcio DECIMAL(5, 2),
+    magnesio DECIMAL(5, 2),
+    manganes DECIMAL(5, 2),
+    fosforo DECIMAL(5, 2),
+    ferro DECIMAL(5, 2),
+    sodio DECIMAL(5, 2),
+    potassio DECIMAL(5, 2),
+    zinco DECIMAL(5, 2),
+    cobre DECIMAL(5, 2),
+    retinol DECIMAL(5, 2),
+    re DECIMAL(5, 2),
+    rae DECIMAL(5, 2),
+    tiamina DECIMAL(5, 2),
+    riboflavina DECIMAL(5, 2),
+    piridoxina DECIMAL(5, 2),
+    niacina DECIMAL(5, 2),
+    vitamina_c DECIMAL(5, 2),
+    saturados DECIMAL(5, 2),
+    monoinsaturados DECIMAL(5, 2),
+    polinsaturados DECIMAL(5, 2),
+	FOREIGN KEY (id_alimento) REFERENCES alimento(id_alimento),
+)
 
 CREATE TABLE subcategoria_popular (
     id_subcategoria BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriaid_seq'),
