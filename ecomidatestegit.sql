@@ -246,12 +246,10 @@ CREATE TABLE usuario (
     tipo_vinculo CHAR(3) NOT NULL,
     documento VARCHAR(14) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_telefone CHECK (LENGTH(telefone) = 11 AND telefone ~ '^[0-9]+$'),
     CONSTRAINT chk_vinculo CHECK (LENGTH(tipo_vinculo) = 3 AND tipo_vinculo IN ('CON', 'AGR', 'ADM', 'ASS')),
     CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$')
 );
 
-COMMENT ON COLUMN usuario.telefone IS 'O check para telefone faz com que o banco aceite apenas números como entrada e receba apenas 11 caracteres.';
 COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE TABLE tipos_de_penalidade (
