@@ -1,247 +1,268 @@
 CREATE SEQUENCE usuarioid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE tipopenalidadeid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE penalidadesid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE barraquinhaid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE feirinhasid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE categoriapopularid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE categoriacientificaid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE alimentoid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE composicaonutricionalid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
+    START 1;
+
+CREATE SEQUENCE saturadosid_seq
+    AS bigint
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+CREATE SEQUENCE monoinsaturadosid_seq
+    AS bigint
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+
+CREATE SEQUENCE polinsaturadosid_seq
+    AS bigint
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE subcategoriaid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE subcategoriacientificaid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE produtoid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE imagensid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE pedidosid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE promocoesid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE ecomidamarketid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE enderecoid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE avaliacoesid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE horariofuncionamentoid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE chatid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE suporteid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE favoritosid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE produtospedidosid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE estoqueid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE cadastro_agricultorid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE visitaid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 		
 CREATE SEQUENCE medidas_caseirasid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE medida_padraoid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE beneficiamentoid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE documentoid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE tipodocid_seq
-    AS integer
+    AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 999999999
+    MAXVALUE 9223372036854775807
     START 1;
 
 
 CREATE SEQUENCE propriedadeid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE correcaoestoqueid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE doceducativoid_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 	
 CREATE SEQUENCE conteudo_seq
-	AS INTEGER
+	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 999999999
+	MAXVALUE 9223372036854775807
 	START 1;
 
 
@@ -347,6 +368,9 @@ COMMENT ON COLUMN alimento.classificacao_alimento IS 'NT significa Natural, MP s
 CREATE TABLE composicao_nutricional (
 	id_composicaonutricional BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('composicaonutricionalid_seq'),
 	id_alimento BIGINT NOT NULL,
+	id_saturados BIGINT NOT NULL,
+	id_monoinsaturados BIGINT NOT NULL,
+	id_polinsaturados BIGINT NOT NULL,
 	umidade DECIMAL(5, 2),
     energia_kcal DECIMAL(5, 2),
     energia_kj DECIMAL(5, 2),
@@ -373,11 +397,48 @@ CREATE TABLE composicao_nutricional (
     piridoxina DECIMAL(5, 2),
     niacina DECIMAL(5, 2),
     vitamina_c DECIMAL(5, 2),
-    saturados DECIMAL(5, 2),
-    monoinsaturados DECIMAL(5, 2),
-    polinsaturados DECIMAL(5, 2),
 	FOREIGN KEY (id_alimento) REFERENCES alimento(id_alimento),
-)
+	FOREIGN KEY (id_saturado) REFERENCES acido_saturados(id_saturados),
+	FOREIGN KEY (id_monoinsaturados) REFERENCES acido_monoinsaturados(id_monoinsaturados),
+	FOREIGN KEY (id_polinsaturados) REFERENCES acido_polinsaturados(id_polinsaturados)
+);
+
+CREATE TABLE acido_saturados (
+	id_saturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('saturadoid_seq')
+	id_composicaonutricional BIGINT NOT NULL,
+	"12:0" DECIMAL(5, 2),
+    "14:0" DECIMAL(5, 2),
+    "16:0" DECIMAL(5, 2),
+    "18:0" DECIMAL(5, 2),
+    "20:0" DECIMAL(5, 2),
+    "22:0" DECIMAL(5, 2),
+    "24:0" DECIMAL(5, 2),
+	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
+);
+
+CREATE TABLE acido_monoinsaturados (
+	id_monoinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('monoinsaturadoid_seq')
+	id_composicaonutricional BIG INT NOT NULL,
+	"14:1" DECIMAL(5, 2),
+    "16:1" DECIMAL(5, 2),
+    "18:1" DECIMAL(5, 2),
+    "20:1" DECIMAL(5, 2),
+	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
+);
+
+CREATE TABLE acido_polinsaturados (
+	id_polinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('polinsaturadoid_seq')
+	id_composicaonutricional BIG INT NOT NULL,
+	"18:2_n-6" DECIMAL(5, 2),
+    "18:3_n-3" DECIMAL(5, 2),
+    "20:4" DECIMAL(5, 2),
+    "20:5" DECIMAL(5, 2),
+    "22:5" DECIMAL(5, 2),
+    "22:6" DECIMAL(5, 2),
+    "18:1t" DECIMAL(5, 2),
+    "18:2t" DECIMAL(5, 2),
+	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
+);
 
 CREATE TABLE subcategoria_popular (
     id_subcategoria BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriaid_seq'),
@@ -733,6 +794,10 @@ TRUNCATE TABLE
     cadastro_agricultor,
     propriedade,
     documentos,
+	acido_polinsaturados,
+	acido_monosaturados,
+	acido_saturados,
+	composicao_nutricional,
     alimento,
 	documentos_educativos,
     tipos_documentos,
@@ -758,6 +823,9 @@ ALTER SEQUENCE feirinhasid_seq RESTART WITH 1;
 ALTER SEQUENCE categoriapopularid_seq RESTART WITH 1;
 ALTER SEQUENCE categoriacientificaid_seq RESTART WITH 1;
 ALTER SEQUENCE alimentoid_seq RESTART WITH 1;
+ALTER SEQUENCE saturadosid_seq RESTART WITH 1;
+ALTER SEQUENCE monoinsaturadosid_seq RESTART WITH 1;
+ALTER SEQUENCE polinsaturadosid_seq RESTART WITH 1;
 ALTER SEQUENCE doceducativoid_seq RESTART WITH 1;
 ALTER SEQUENCE subcategoriaid_seq RESTART WITH 1;
 ALTER SEQUENCE subcategoriacientificaid_seq RESTART WITH 1;
@@ -784,7 +852,6 @@ ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
 ALTER SEQUENCE conteudo_seq RESTART WITH 1;
 
 
-
 DROP TABLE IF EXISTS Conteudos_interface;
 DROP TABLE IF EXISTS penalidades;
 DROP TABLE IF EXISTS chat;
@@ -804,6 +871,9 @@ DROP TABLE IF EXISTS beneficiamento;
 DROP TABLE IF EXISTS propriedade;
 DROP TABLE IF EXISTS cadastro_agricultor;
 DROP TABLE IF EXISTS documentos;
+DROP TABLE IF EXISTS acido_saturados;
+DROP TABLE IF EXISTS acido_monoinsaturados;
+DROP TABLE IF EXISTS acido_polinsaturados;
 DROP TABLE IF EXISTS alimento;
 DROP TABLE IF EXISTS documentos_educativos;
 DROP TABLE IF EXISTS tipos_documentos;
@@ -839,6 +909,9 @@ DROP SEQUENCE IF EXISTS beneficiamentoid_seq;
 DROP SEQUENCE IF EXISTS propriedadeid_seq;
 DROP SEQUENCE IF EXISTS cadastro_agricultorid_seq;
 DROP SEQUENCE IF EXISTS documentoid_seq;
+DROP SEQUENCE IF EXISTS saturadosid_seq;
+DROP SEQUENCE IF EXISTS monoinsaturadosid_seq;
+DROP SEQUENCE IF EXISTS polinsaturadosid_seq;
 DROP SEQUENCE IF EXISTS alimentoid_seq;
 DROP SEQUENCE IF EXISTS doceducativoid_seq;
 DROP SEQUENCE IF EXISTS tipodocid_seq;
