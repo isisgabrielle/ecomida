@@ -345,13 +345,11 @@ CREATE TABLE categoria_cientifica (
 );
 
 COMMENT ON COLUMN categoria_cientifica.nome_categoria IS 'Nome da categoria científica. Deve ser único.';
-
 CREATE TABLE alimento (
     id_alimento BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('alimentoid_seq'),
     nome_alimento VARCHAR(100) NOT NULL,
     id_categoriapopular BIGINT NOT NULL,
     id_categoriacientifica BIGINT NOT NULL,
-	id_composicaonutricional BIGINT NOT NULL,
     classificacao_alimento CHAR(2) NOT NULL,
     alimento_regional BOOLEAN NOT NULL,
     informacoes_educativas VARCHAR(400) NOT NULL,
@@ -359,12 +357,41 @@ CREATE TABLE alimento (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica),
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular),
-	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional),
     CONSTRAINT chk_classificacao_alimento CHECK (LENGTH(classificacao_alimento) = 2 AND classificacao_alimento IN ('NT', 'MP', 'PR'))
 );
+CREATE TABLE acido_saturados (
+	id_saturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('saturadosid_seq'),
+	"12:0" DECIMAL(5, 2),
+    "14:0" DECIMAL(5, 2),
+    "16:0" DECIMAL(5, 2),
+    "18:0" DECIMAL(5, 2),
+    "20:0" DECIMAL(5, 2),
+    "22:0" DECIMAL(5, 2),
+    "24:0" DECIMAL(5, 2)
+	
+);
 
-COMMENT ON COLUMN alimento.classificacao_alimento IS 'NT significa Natural, MP significa Minimamente Processado, PR significa Processado.';
+CREATE TABLE acido_monoinsaturados (
+	id_monoinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('monoinsaturadosid_seq'),
+	"14:1" DECIMAL(5, 2),
+    "16:1" DECIMAL(5, 2),
+    "18:1" DECIMAL(5, 2),
+    "20:1" DECIMAL(5, 2)
+	
+);
 
+CREATE TABLE acido_polinsaturados (
+	id_polinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('polinsaturadosid_seq'),
+	"18:2_n-6" DECIMAL(5, 2),
+    "18:3_n-3" DECIMAL(5, 2),
+    "20:4" DECIMAL(5, 2),
+    "20:5" DECIMAL(5, 2),
+    "22:5" DECIMAL(5, 2),
+    "22:6" DECIMAL(5, 2),
+    "18:1t" DECIMAL(5, 2),
+    "18:2t" DECIMAL(5, 2)
+	
+);
 CREATE TABLE composicao_nutricional (
 	id_composicaonutricional BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('composicaonutricionalid_seq'),
 	id_alimento BIGINT NOT NULL,
@@ -398,47 +425,15 @@ CREATE TABLE composicao_nutricional (
     niacina DECIMAL(5, 2),
     vitamina_c DECIMAL(5, 2),
 	FOREIGN KEY (id_alimento) REFERENCES alimento(id_alimento),
-	FOREIGN KEY (id_saturado) REFERENCES acido_saturados(id_saturados),
+	FOREIGN KEY (id_saturados) REFERENCES acido_saturados(id_saturados),
 	FOREIGN KEY (id_monoinsaturados) REFERENCES acido_monoinsaturados(id_monoinsaturados),
 	FOREIGN KEY (id_polinsaturados) REFERENCES acido_polinsaturados(id_polinsaturados)
 );
 
-CREATE TABLE acido_saturados (
-	id_saturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('saturadoid_seq'),
-	id_composicaonutricional BIGINT NOT NULL,
-	"12:0" DECIMAL(5, 2),
-    "14:0" DECIMAL(5, 2),
-    "16:0" DECIMAL(5, 2),
-    "18:0" DECIMAL(5, 2),
-    "20:0" DECIMAL(5, 2),
-    "22:0" DECIMAL(5, 2),
-    "24:0" DECIMAL(5, 2),
-	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
-);
 
-CREATE TABLE acido_monoinsaturados (
-	id_monoinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('monoinsaturadoid_seq'),
-	id_composicaonutricional BIGINT NOT NULL,
-	"14:1" DECIMAL(5, 2),
-    "16:1" DECIMAL(5, 2),
-    "18:1" DECIMAL(5, 2),
-    "20:1" DECIMAL(5, 2),
-	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
-);
+COMMENT ON COLUMN alimento.classificacao_alimento IS 'NT significa Natural, MP significa Minimamente Processado, PR significa Processado.';
 
-CREATE TABLE acido_polinsaturados (
-	id_polinsaturados BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('polinsaturadoid_seq'),
-	id_composicaonutricional BIGINT NOT NULL,
-	"18:2_n-6" DECIMAL(5, 2),
-    "18:3_n-3" DECIMAL(5, 2),
-    "20:4" DECIMAL(5, 2),
-    "20:5" DECIMAL(5, 2),
-    "22:5" DECIMAL(5, 2),
-    "22:6" DECIMAL(5, 2),
-    "18:1t" DECIMAL(5, 2),
-    "18:2t" DECIMAL(5, 2),
-	FOREIGN KEY (id_composicaonutricional) REFERENCES composicao_nutricional(id_composicaonutricional)
-);
+
 
 CREATE TABLE subcategoria_popular (
     id_subcategoria BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriaid_seq'),
@@ -761,10 +756,8 @@ VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
        (nextval('categoriacientificaid_seq'), 'Proteico'),
 	   (nextval('categoriacientificaid_seq'), 'Energético');
 
-INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_categoriacientifica, classificacao_alimento, composicao_nutricional, alimento_regional, informacoes_educativas, selo_inspecao)
-VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', 'Vitamina C, fibra', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
-	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2, 'PR', 'Proteína, cálcio', TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
-       
+INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_categoriacientifica, classificacao_alimento, alimento_regional, informacoes_educativas, selo_inspecao)
+VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', FALSE, 'A maçã é uma fruta rica em nutrientes', TRUE);       
 
 select * from usuario; 
 select * from barraquinha;
@@ -772,158 +765,3 @@ select * from feirinhas;
 select * from categoria_popular;
 select * from categoria_cientifica;
 select * from alimento;
-
-TRUNCATE TABLE 
-	Conteudos_interface,
-    penalidades,
-	chat,
-    suporte,
-    imagens,
-    produtos_pedidos,
-    estoque,
-    ecomidamarket,
-    pedidos,
-    promocoes,
-    favoritos,
-    avaliacoes,
-    barraquinha,
-    visitacao,
-    correcao_estoque,
-    horario_funcionamento,
-    beneficiamento,
-    cadastro_agricultor,
-    propriedade,
-    documentos,
-	acido_polinsaturados,
-	acido_monosaturados,
-	acido_saturados,
-	composicao_nutricional,
-    alimento,
-	documentos_educativos,
-    tipos_documentos,
-    tipos_de_penalidade,
-    subcategoria_popular,
-    subcategoria_cientifica,
-    categoria_popular,
-    categoria_cientifica,
-    produto,
-    endereco,
-    feirinhas,
-    medidas_caseiras,
-    medidas_padrao,
-    usuario;
-
-ALTER SEQUENCE usuarioid_seq RESTART WITH 1;
-ALTER SEQUENCE medidas_caseirasid_seq RESTART WITH 1;
-ALTER SEQUENCE medida_padraoid_seq RESTART WITH 1;
-ALTER SEQUENCE tipopenalidadeid_seq RESTART WITH 1;
-ALTER SEQUENCE penalidadesid_seq RESTART WITH 1;
-ALTER SEQUENCE barraquinhaid_seq RESTART WITH 1;
-ALTER SEQUENCE feirinhasid_seq RESTART WITH 1;
-ALTER SEQUENCE categoriapopularid_seq RESTART WITH 1;
-ALTER SEQUENCE categoriacientificaid_seq RESTART WITH 1;
-ALTER SEQUENCE alimentoid_seq RESTART WITH 1;
-ALTER SEQUENCE saturadosid_seq RESTART WITH 1;
-ALTER SEQUENCE monoinsaturadosid_seq RESTART WITH 1;
-ALTER SEQUENCE polinsaturadosid_seq RESTART WITH 1;
-ALTER SEQUENCE doceducativoid_seq RESTART WITH 1;
-ALTER SEQUENCE subcategoriaid_seq RESTART WITH 1;
-ALTER SEQUENCE subcategoriacientificaid_seq RESTART WITH 1;
-ALTER SEQUENCE produtoid_seq RESTART WITH 1;
-ALTER SEQUENCE imagensid_seq RESTART WITH 1;
-ALTER SEQUENCE pedidosid_seq RESTART WITH 1;
-ALTER SEQUENCE promocoesid_seq RESTART WITH 1;
-ALTER SEQUENCE ecomidamarketid_seq RESTART WITH 1;
-ALTER SEQUENCE enderecoid_seq RESTART WITH 1;
-ALTER SEQUENCE avaliacoesid_seq RESTART WITH 1;
-ALTER SEQUENCE horariofuncionamentoid_seq RESTART WITH 1;
-ALTER SEQUENCE chatid_seq RESTART WITH 1;
-ALTER SEQUENCE suporteid_seq RESTART WITH 1;
-ALTER SEQUENCE favoritosid_seq RESTART WITH 1;
-ALTER SEQUENCE produtospedidosid_seq RESTART WITH 1;
-ALTER SEQUENCE estoqueid_seq RESTART WITH 1;
-ALTER SEQUENCE cadastro_agricultorid_seq RESTART WITH 1;
-ALTER SEQUENCE beneficiamentoid_seq RESTART WITH 1;
-ALTER SEQUENCE documentoid_seq RESTART WITH 1;
-ALTER SEQUENCE propriedadeid_seq RESTART WITH 1;
-ALTER SEQUENCE visitaid_seq RESTART WITH 1;
-ALTER SEQUENCE correcaoestoqueid_seq RESTART WITH 1;
-ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
-ALTER SEQUENCE conteudo_seq RESTART WITH 1;
-
-
-DROP TABLE IF EXISTS Conteudos_interface;
-DROP TABLE IF EXISTS penalidades;
-DROP TABLE IF EXISTS chat;
-DROP TABLE IF EXISTS suporte;
-DROP TABLE IF EXISTS imagens;
-DROP TABLE IF EXISTS produtos_pedidos;
-DROP TABLE IF EXISTS estoque;
-DROP TABLE IF EXISTS ecomidamarket;
-DROP TABLE IF EXISTS promocoes;
-DROP TABLE IF EXISTS favoritos;
-DROP TABLE IF EXISTS avaliacoes;
-DROP TABLE IF EXISTS pedidos;
-DROP TABLE IF EXISTS visitacao; 
-DROP TABLE IF EXISTS correcao_estoque;
-DROP TABLE IF EXISTS horario_funcionamento;
-DROP TABLE IF EXISTS beneficiamento;
-DROP TABLE IF EXISTS propriedade;
-DROP TABLE IF EXISTS cadastro_agricultor;
-DROP TABLE IF EXISTS documentos;
-DROP TABLE IF EXISTS acido_saturados;
-DROP TABLE IF EXISTS acido_monoinsaturados;
-DROP TABLE IF EXISTS acido_polinsaturados;
-DROP TABLE IF EXISTS alimento;
-DROP TABLE IF EXISTS documentos_educativos;
-DROP TABLE IF EXISTS tipos_documentos;
-DROP TABLE IF EXISTS tipos_de_penalidade;
-DROP TABLE IF EXISTS produto;
-DROP TABLE IF EXISTS subcategoria_popular;
-DROP TABLE IF EXISTS subcategoria_cientifica;
-DROP TABLE IF EXISTS categoria_popular;
-DROP TABLE IF EXISTS categoria_cientifica;
-DROP TABLE IF EXISTS barraquinha;
-DROP TABLE IF EXISTS endereco;
-DROP TABLE IF EXISTS feirinhas;
-DROP TABLE IF EXISTS medidas_caseiras;
-DROP TABLE IF EXISTS medidas_padrao;
-DROP TABLE IF EXISTS usuario;
-
-DROP SEQUENCE IF EXISTS conteudo_seq;
-DROP SEQUENCE IF EXISTS penalidadesid_seq;
-DROP SEQUENCE IF EXISTS chatid_seq;
-DROP SEQUENCE IF EXISTS suporteid_seq;
-DROP SEQUENCE IF EXISTS imagensid_seq;
-DROP SEQUENCE IF EXISTS produtospedidosid_seq;
-DROP SEQUENCE IF EXISTS estoqueid_seq;
-DROP SEQUENCE IF EXISTS ecomidamarketid_seq;
-DROP SEQUENCE IF EXISTS promocoesid_seq;
-DROP SEQUENCE IF EXISTS favoritosid_seq;
-DROP SEQUENCE IF EXISTS avaliacoesid_seq;
-DROP SEQUENCE IF EXISTS pedidosid_seq;
-DROP SEQUENCE IF EXISTS visitaid_seq;
-DROP SEQUENCE IF EXISTS correcaoestoqueid_seq;
-DROP SEQUENCE IF EXISTS horariofuncionamentoid_seq;
-DROP SEQUENCE IF EXISTS beneficiamentoid_seq;
-DROP SEQUENCE IF EXISTS propriedadeid_seq;
-DROP SEQUENCE IF EXISTS cadastro_agricultorid_seq;
-DROP SEQUENCE IF EXISTS documentoid_seq;
-DROP SEQUENCE IF EXISTS saturadosid_seq;
-DROP SEQUENCE IF EXISTS monoinsaturadosid_seq;
-DROP SEQUENCE IF EXISTS polinsaturadosid_seq;
-DROP SEQUENCE IF EXISTS alimentoid_seq;
-DROP SEQUENCE IF EXISTS doceducativoid_seq;
-DROP SEQUENCE IF EXISTS tipodocid_seq;
-DROP SEQUENCE IF EXISTS tipopenalidadeid_seq;
-DROP SEQUENCE IF EXISTS produtoid_seq;
-DROP SEQUENCE IF EXISTS subcategoriaid_seq;
-DROP SEQUENCE IF EXISTS subcategoriacientificaid_seq;
-DROP SEQUENCE IF EXISTS categoriapopularid_seq;
-DROP SEQUENCE IF EXISTS categoriacientificaid_seq;
-DROP SEQUENCE IF EXISTS barraquinhaid_seq;
-DROP SEQUENCE IF EXISTS enderecoid_seq;
-DROP SEQUENCE IF EXISTS feirinhasid_seq;
-DROP SEQUENCE IF EXISTS medidas_caseirasid_seq;
-DROP SEQUENCE IF EXISTS medida_padraoid_seq;
-DROP SEQUENCE IF EXISTS usuarioid_seq;
