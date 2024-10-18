@@ -2,239 +2,239 @@ CREATE SEQUENCE usuarioid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-   	MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE tipopenalidadeid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE penalidadesid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE barraquinhaid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE feirinhasid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE categoriapopularid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE categoriacientificaid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE alimentoid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE subcategoriaid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE subcategoriacientificaid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE produtoid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE imagensid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE pedidosid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE promocoesid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE ecomidamarketid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE enderecoid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE avaliacoesid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE horariofuncionamentoid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE chatid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE suporteid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE favoritosid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE produtospedidosid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE estoqueid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE cadastro_agricultorid_seq
     AS bigint
     INCREMENT 1
     MINVALUE 1
-    MAXVALUE 9223372036854775807 
+    MAXVALUE 9223372036854775807
     START 1;
 
 CREATE SEQUENCE visitaid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 		
 CREATE SEQUENCE medidas_caseirasid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE medida_padraoid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE beneficiamentoid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE documentoid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE tipodocid_seq
-    AS bigint
-    INCREMENT 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807 
-    START 1;
+       AS bigint
+       INCREMENT 1
+       MINVALUE 1
+       MAXVALUE 9223372036854775807
+       START 1;
 
 
 CREATE SEQUENCE propriedadeid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE correcaoestoqueid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 CREATE SEQUENCE doceducativoid_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 	
 CREATE SEQUENCE conteudo_seq
 	AS bigint
 	INCREMENT 1
 	MINVALUE 1
-	MAXVALUE 9223372036854775807 
+	MAXVALUE 9223372036854775807
 	START 1;
 
 
@@ -246,12 +246,10 @@ CREATE TABLE usuario (
     tipo_vinculo CHAR(3) NOT NULL,
     documento VARCHAR(14) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_telefone CHECK (LENGTH(telefone) = 11 AND telefone ~ '^[0-9]+$'),
     CONSTRAINT chk_vinculo CHECK (LENGTH(tipo_vinculo) = 3 AND tipo_vinculo IN ('CON', 'AGR', 'ADM', 'ASS')),
     CONSTRAINT chk_documento CHECK (documento ~ '^[0-9]+$')
 );
 
-COMMENT ON COLUMN usuario.telefone IS 'O check para telefone faz com que o banco aceite apenas números como entrada e receba apenas 11 caracteres.';
 COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE TABLE tipos_de_penalidade (
@@ -319,24 +317,70 @@ CREATE TABLE categoria_cientifica (
 );
 
 COMMENT ON COLUMN categoria_cientifica.nome_categoria IS 'Nome da categoria científica. Deve ser único.';
-
 CREATE TABLE alimento (
     id_alimento BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('alimentoid_seq'),
     nome_alimento VARCHAR(100) NOT NULL,
     id_categoriapopular BIGINT NOT NULL,
     id_categoriacientifica BIGINT NOT NULL,
     classificacao_alimento CHAR(2) NOT NULL,
-    composicao_nutricional VARCHAR(500) NOT NULL,
     alimento_regional BOOLEAN NOT NULL,
     informacoes_educativas VARCHAR(400) NOT NULL,
     selo_inspecao BOOLEAN NOT NULL,
+    umidade DECIMAL(5, 2),
+    energia_kcal DECIMAL(5, 2),
+    energia_kj DECIMAL(5, 2),
+    proteina DECIMAL(5, 2),
+    lipideos DECIMAL(5, 2),
+    colesterol DECIMAL(5, 2),
+    carboidrato DECIMAL(5, 2),
+    fibra DECIMAL(5, 2),
+    cinzas DECIMAL(5, 2),
+    calcio DECIMAL(5, 2),
+    magnesio DECIMAL(5, 2),
+    manganes DECIMAL(5, 2),
+    fosforo DECIMAL(5, 2),
+    ferro DECIMAL(5, 2),
+    sodio DECIMAL(5, 2),
+    potassio DECIMAL(5, 2),
+    zinco DECIMAL(5, 2),
+    cobre DECIMAL(5, 2),
+    retinol DECIMAL(5, 2),
+    re DECIMAL(5, 2),
+    rae DECIMAL(5, 2),
+    tiamina DECIMAL(5, 2),
+    riboflavina DECIMAL(5, 2),
+    piridoxina DECIMAL(5, 2),
+    niacina DECIMAL(5, 2),
+    vitamina_c DECIMAL(5, 2),
+    "SAT_12:0" DECIMAL(5, 2),
+    "SAT_14:0" DECIMAL(5, 2),
+    "SAT_16:0" DECIMAL(5, 2),
+    "SAT_18:0" DECIMAL(5, 2),
+    "SAT_20:0" DECIMAL(5, 2),
+    "SAT_22:0" DECIMAL(5, 2),
+    "SAT_24:0" DECIMAL(5, 2),
+    "MINSAT_14:1" DECIMAL(5, 2),
+    "MINSAT_16:1" DECIMAL(5, 2),
+    "MINSAT_18:1" DECIMAL(5, 2),
+    "MINSAT_20:1" DECIMAL(5, 2),
+    "POLI_18:2_n-6" DECIMAL(5, 2),
+    "POLI_18:3_n-3" DECIMAL(5, 2),
+    "POLI_20:4" DECIMAL(5, 2),
+    "POLI_20:5" DECIMAL(5, 2),
+    "POLI_22:5" DECIMAL(5, 2),
+    "POLI_22:6" DECIMAL(5, 2),
+    "POLI_18:1t" DECIMAL(5, 2),
+    "POLI_18:2t" DECIMAL(5, 2),
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoriacientifica) REFERENCES categoria_cientifica(id_categoriacientifica),
     FOREIGN KEY (id_categoriapopular) REFERENCES categoria_popular(id_categoriapopular),
     CONSTRAINT chk_classificacao_alimento CHECK (LENGTH(classificacao_alimento) = 2 AND classificacao_alimento IN ('NT', 'MP', 'PR'))
-);
 
+);
 COMMENT ON COLUMN alimento.classificacao_alimento IS 'NT significa Natural, MP significa Minimamente Processado, PR significa Processado.';
+COMMENT ON COLUMN alimento."SAT_12:0" IS 'SAT refere-se aos acidos saturados';
+COMMENT ON COLUMN alimento."MINSAT_14:1" IS 'SAT refere-se aos acidos monoinsaturados';
+COMMENT ON COLUMN alimento."POLI_20:4" IS 'POLI refere-se aos acidos poliinsaturados';
 
 CREATE TABLE subcategoria_popular (
     id_subcategoria BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriaid_seq'),
@@ -421,7 +465,7 @@ CREATE TABLE endereco (
 
 CREATE TABLE avaliacoes (
     id_avaliacoes BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacoesid_seq'),
-  	id_pedidos BIGINT NOT NULL,
+    id_pedidos BIGINT NOT NULL,
     id_usuario BIGINT NOT NULL,
     avaliacao_barraquinha VARCHAR(1) NOT NULL,
     data_avaliacao DATE,
@@ -436,7 +480,7 @@ CREATE TABLE horario_funcionamento (
     horario_abertura TIME NOT NULL,
     horario_fechamento TIME NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	dias_funcionamento VARCHAR(256) NOT NULL,
+    dias_funcionamento VARCHAR(256) NOT NULL,
     CONSTRAINT chk_dias_funcionamento CHECK (dias_funcionamento IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo')),
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha)
 );
@@ -445,9 +489,9 @@ CREATE TABLE chat (
     id_chat BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('chatid_seq'),
     id_pedidos BIGINT NOT NULL,
     mensagem VARCHAR(300) NOT NULL,
-	data_envio DATE NOT NULL,
-	tipo_remetente VARCHAR (20) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_envio DATE NOT NULL,
+    tipo_remetente VARCHAR (20) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
     CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('C', 'A', 'ADM'))
 );
@@ -456,14 +500,14 @@ CREATE TABLE suporte (
     id_suporte BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('suporteid_seq'),
     id_usuario BIGINT NOT NULL,
     solicitacao VARCHAR(50) NOT NULL,
-	data_solicitacao DATE NOT NULL, 
+    data_solicitacao DATE NOT NULL, 
     descricao VARCHAR(300) NOT NULL,
-	status_suporte VARCHAR(30) NOT NULL,
-	data_resolucao DATE, 
+    status_suporte VARCHAR(30) NOT NULL,
+    data_resolucao DATE, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     CONSTRAINT chk_solicitacao CHECK (
-        solicitacao IN (
+    solicitacao IN (
             'Problema Tecnico', 'Duvidas sobre Produtos', 
             'Problemas com Pedidos', 'Reembolso', 
             'Problemas de Pagamento', 'Sugestao', 
@@ -497,14 +541,14 @@ CREATE TABLE produtos_pedidos (
     quantidade INT NOT NULL,
     valor_quantidade decimal NOT NULL,
     valor_embalagem decimal, 
-	valor_desconto decimal,
-	valor_total decimal NOT NULL, 
+    valor_desconto decimal,
+    valor_total decimal NOT NULL, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CHECK (quantidade >= 0), 
-	CHECK (valor_quantidade >= 0), 
-	CHECK (valor_embalagem >= 0), 
-	CHECK (valor_desconto >= 0), 
-	CHECK (valor_total >= 0), 
+    CHECK (valor_quantidade >= 0), 
+    CHECK (valor_embalagem >= 0), 
+    CHECK (valor_desconto >= 0), 
+    CHECK (valor_total >= 0), 
     foreign key (id_produto) references produto(id_produto),
     foreign key (id_pedidos) references pedidos(id_pedidos)
  );
@@ -515,8 +559,8 @@ CREATE TABLE estoque (
     id_barraquinha BIGINT NOT NULL, 
     quantidade decimal NOT NULL,
     valor_quantidade decimal NOT NULL,
-	CHECK (quantidade >= 0), 
-	CHECK (valor_quantidade >= 0), 
+    CHECK (quantidade >= 0), 
+    CHECK (valor_quantidade >= 0), 
     foreign key (id_produto) references produto(id_produto),
     foreign key (id_barraquinha) references barraquinha(id_barraquinha)
  );
@@ -529,7 +573,7 @@ CREATE TABLE cadastro_agricultor (
     possui_registro BOOLEAN NOT NULL,
     registro_organico VARCHAR(256) NOT NULL,
     certificacoes VARCHAR (256) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_agricultor) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_assistente_social) REFERENCES usuario(id_usuario)
 );
@@ -539,7 +583,7 @@ CREATE TABLE medidas_padrao (
     nome VARCHAR(50) NOT NULL,
     unidade_medida VARCHAR(20) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
 
@@ -550,7 +594,7 @@ CREATE TABLE medidas_caseiras (
     id_medida_padrao BIGINT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_medida_padrao) REFERENCES medidas_padrao(id_medida_padrao),
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
@@ -593,7 +637,7 @@ CREATE TABLE propriedade (
     foto_propriedade3 VARCHAR(256),                  
     descricao TEXT NOT NULL,                                     
     latitude NUMERIC(9, 6) NOT NULL,                            
-    longitude NUMERIC(9, 6) NOT NULL,    -- VER ISSO                                                            
+    longitude NUMERIC(9, 6) NOT NULL,                                                              
     FOREIGN KEY (id_cadastro_agricultor) REFERENCES cadastro_agricultor(id_cadastro_agricultor),
     CHECK (latitude BETWEEN -90 AND 90),             
     CHECK (longitude BETWEEN -180 AND 180)            
@@ -605,7 +649,7 @@ CREATE TABLE visitacao (
     id_barraquinha BIGINT NOT NULL,
     aberta_visita BOOLEAN NOT NULL, 
     cobra_visita BOOLEAN NOT NULL,
-    valor_visita DECIMAL NOT NULL, -- VER ISSO
+    valor_visita DECIMAL NOT NULL, 
     producao_anos INT NOT NULL,       
     CHECK (valor_visita >= 0), 
     CHECK (producao_anos >= 0), 
