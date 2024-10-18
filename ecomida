@@ -202,11 +202,11 @@ CREATE SEQUENCE documentoid_seq
 	START 1;
 
 CREATE SEQUENCE tipodocid_seq
-    AS bigint
-    INCREMENT 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    START 1;
+       AS bigint
+       INCREMENT 1
+       MINVALUE 1
+       MAXVALUE 9223372036854775807
+       START 1;
 
 
 CREATE SEQUENCE propriedadeid_seq
@@ -326,7 +326,7 @@ CREATE TABLE alimento (
     alimento_regional BOOLEAN NOT NULL,
     informacoes_educativas VARCHAR(400) NOT NULL,
     selo_inspecao BOOLEAN NOT NULL,
-	umidade DECIMAL(5, 2),
+    umidade DECIMAL(5, 2),
     energia_kcal DECIMAL(5, 2),
     energia_kj DECIMAL(5, 2),
     proteina DECIMAL(5, 2),
@@ -352,18 +352,18 @@ CREATE TABLE alimento (
     piridoxina DECIMAL(5, 2),
     niacina DECIMAL(5, 2),
     vitamina_c DECIMAL(5, 2),
-	"SAT_12:0" DECIMAL(5, 2),
+    "SAT_12:0" DECIMAL(5, 2),
     "SAT_14:0" DECIMAL(5, 2),
     "SAT_16:0" DECIMAL(5, 2),
     "SAT_18:0" DECIMAL(5, 2),
     "SAT_20:0" DECIMAL(5, 2),
     "SAT_22:0" DECIMAL(5, 2),
     "SAT_24:0" DECIMAL(5, 2),
-	"MINSAT_14:1" DECIMAL(5, 2),
+    "MINSAT_14:1" DECIMAL(5, 2),
     "MINSAT_16:1" DECIMAL(5, 2),
     "MINSAT_18:1" DECIMAL(5, 2),
     "MINSAT_20:1" DECIMAL(5, 2),
-	"POLI_18:2_n-6" DECIMAL(5, 2),
+    "POLI_18:2_n-6" DECIMAL(5, 2),
     "POLI_18:3_n-3" DECIMAL(5, 2),
     "POLI_20:4" DECIMAL(5, 2),
     "POLI_20:5" DECIMAL(5, 2),
@@ -465,7 +465,7 @@ CREATE TABLE endereco (
 
 CREATE TABLE avaliacoes (
     id_avaliacoes BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('avaliacoesid_seq'),
-  	id_pedidos BIGINT NOT NULL,
+    id_pedidos BIGINT NOT NULL,
     id_usuario BIGINT NOT NULL,
     avaliacao_barraquinha VARCHAR(1) NOT NULL,
     data_avaliacao DATE,
@@ -480,7 +480,7 @@ CREATE TABLE horario_funcionamento (
     horario_abertura TIME NOT NULL,
     horario_fechamento TIME NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	dias_funcionamento VARCHAR(256) NOT NULL,
+    dias_funcionamento VARCHAR(256) NOT NULL,
     CONSTRAINT chk_dias_funcionamento CHECK (dias_funcionamento IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo')),
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha)
 );
@@ -489,9 +489,9 @@ CREATE TABLE chat (
     id_chat BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('chatid_seq'),
     id_pedidos BIGINT NOT NULL,
     mensagem VARCHAR(300) NOT NULL,
-	data_envio DATE NOT NULL,
-	tipo_remetente VARCHAR (20) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_envio DATE NOT NULL,
+    tipo_remetente VARCHAR (20) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
     CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('C', 'A', 'ADM'))
 );
@@ -500,14 +500,14 @@ CREATE TABLE suporte (
     id_suporte BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('suporteid_seq'),
     id_usuario BIGINT NOT NULL,
     solicitacao VARCHAR(50) NOT NULL,
-	data_solicitacao DATE NOT NULL, 
+    data_solicitacao DATE NOT NULL, 
     descricao VARCHAR(300) NOT NULL,
-	status_suporte VARCHAR(30) NOT NULL,
-	data_resolucao DATE, 
+    status_suporte VARCHAR(30) NOT NULL,
+    data_resolucao DATE, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     CONSTRAINT chk_solicitacao CHECK (
-        solicitacao IN (
+    solicitacao IN (
             'Problema Tecnico', 'Duvidas sobre Produtos', 
             'Problemas com Pedidos', 'Reembolso', 
             'Problemas de Pagamento', 'Sugestao', 
@@ -541,14 +541,14 @@ CREATE TABLE produtos_pedidos (
     quantidade INT NOT NULL,
     valor_quantidade decimal NOT NULL,
     valor_embalagem decimal, 
-	valor_desconto decimal,
-	valor_total decimal NOT NULL, 
+    valor_desconto decimal,
+    valor_total decimal NOT NULL, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CHECK (quantidade >= 0), 
-	CHECK (valor_quantidade >= 0), 
-	CHECK (valor_embalagem >= 0), 
-	CHECK (valor_desconto >= 0), 
-	CHECK (valor_total >= 0), 
+    CHECK (valor_quantidade >= 0), 
+    CHECK (valor_embalagem >= 0), 
+    CHECK (valor_desconto >= 0), 
+    CHECK (valor_total >= 0), 
     foreign key (id_produto) references produto(id_produto),
     foreign key (id_pedidos) references pedidos(id_pedidos)
  );
@@ -559,8 +559,8 @@ CREATE TABLE estoque (
     id_barraquinha BIGINT NOT NULL, 
     quantidade decimal NOT NULL,
     valor_quantidade decimal NOT NULL,
-	CHECK (quantidade >= 0), 
-	CHECK (valor_quantidade >= 0), 
+    CHECK (quantidade >= 0), 
+    CHECK (valor_quantidade >= 0), 
     foreign key (id_produto) references produto(id_produto),
     foreign key (id_barraquinha) references barraquinha(id_barraquinha)
  );
@@ -573,7 +573,7 @@ CREATE TABLE cadastro_agricultor (
     possui_registro BOOLEAN NOT NULL,
     registro_organico VARCHAR(256) NOT NULL,
     certificacoes VARCHAR (256) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_agricultor) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_assistente_social) REFERENCES usuario(id_usuario)
 );
@@ -583,7 +583,7 @@ CREATE TABLE medidas_padrao (
     nome VARCHAR(50) NOT NULL,
     unidade_medida VARCHAR(20) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
 
@@ -594,7 +594,7 @@ CREATE TABLE medidas_caseiras (
     id_medida_padrao BIGINT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
-	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_medida_padrao) REFERENCES medidas_padrao(id_medida_padrao),
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
@@ -637,7 +637,7 @@ CREATE TABLE propriedade (
     foto_propriedade3 VARCHAR(256),                  
     descricao TEXT NOT NULL,                                     
     latitude NUMERIC(9, 6) NOT NULL,                            
-    longitude NUMERIC(9, 6) NOT NULL,    -- VER ISSO                                                            
+    longitude NUMERIC(9, 6) NOT NULL,                                                              
     FOREIGN KEY (id_cadastro_agricultor) REFERENCES cadastro_agricultor(id_cadastro_agricultor),
     CHECK (latitude BETWEEN -90 AND 90),             
     CHECK (longitude BETWEEN -180 AND 180)            
@@ -649,7 +649,7 @@ CREATE TABLE visitacao (
     id_barraquinha BIGINT NOT NULL,
     aberta_visita BOOLEAN NOT NULL, 
     cobra_visita BOOLEAN NOT NULL,
-    valor_visita DECIMAL NOT NULL, -- VER ISSO
+    valor_visita DECIMAL NOT NULL, 
     producao_anos INT NOT NULL,       
     CHECK (valor_visita >= 0), 
     CHECK (producao_anos >= 0), 
@@ -682,35 +682,6 @@ CREATE TABLE Conteudos_interface (
     id_conteudo BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('conteudo_seq'),
     titulo VARCHAR(256) NOT NULL   
 );
-
-INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento) 
-VALUES 
-    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901'),
-    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100');
-
-INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preco_entrega, funcionamento_diadasemana, funcionamento_fds) 
-VALUES 
-    (nextval('barraquinhaid_seq'), 2, 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
-
-
-INSERT INTO categoria_popular (id_categoriapopular, nome_categoria)
-VALUES (nextval('categoriapopularid_seq'), 'Frutas'),
-	   (nextval('categoriapopularid_seq'), 'Verduras'),
-	   (nextval('categoriapopularid_seq'), 'Laticínios');
-	   
-INSERT INTO categoria_cientifica (id_categoriacientifica, nome_categoria)
-VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
-       (nextval('categoriacientificaid_seq'), 'Proteico'),
-	   (nextval('categoriacientificaid_seq'), 'Energético');
-
-
-
-select * from usuario; 
-select * from barraquinha;
-select * from feirinhas;
-select * from categoria_popular;
-select * from categoria_cientifica;
-select * from alimento;
 
 TRUNCATE TABLE 
 	Conteudos_interface,
@@ -782,6 +753,38 @@ ALTER SEQUENCE visitaid_seq RESTART WITH 1;
 ALTER SEQUENCE correcaoestoqueid_seq RESTART WITH 1;
 ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
 ALTER SEQUENCE conteudo_seq RESTART WITH 1;
+
+INSERT INTO usuario (id_usuario, nome, email, telefone, tipo_vinculo, documento) 
+VALUES 
+    (nextval('usuarioid_seq'), 'João Silva', 'joao@email.com', '11111111111', 'CON', '12345678901'),
+    (nextval('usuarioid_seq'), 'Maria Oliveira', 'maria@email.com', '22222222222', 'AGR', '98765432100');
+
+INSERT INTO barraquinha (id_barraquinha, id_usuario, nome_barraquinha, telefone_barraquinha, realiza_entrega, pontos_de_encontro, preco_entrega, funcionamento_diadasemana, funcionamento_fds) 
+VALUES 
+    (nextval('barraquinhaid_seq'), 2, 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
+
+
+INSERT INTO categoria_popular (id_categoriapopular, nome_categoria)
+VALUES (nextval('categoriapopularid_seq'), 'Frutas'),
+	   (nextval('categoriapopularid_seq'), 'Verduras'),
+	   (nextval('categoriapopularid_seq'), 'Laticínios');
+	   
+INSERT INTO categoria_cientifica (id_categoriacientifica, nome_categoria)
+VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
+       (nextval('categoriacientificaid_seq'), 'Proteico'),
+	   (nextval('categoriacientificaid_seq'), 'Energético');
+
+INSERT INTO alimento (id_alimento, nome_alimento, id_categoriapopular, id_categoriacientifica, classificacao_alimento, alimento_regional, informacoes_educativas, selo_inspecao)
+VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
+	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2,'NT',TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
+       
+
+select * from usuario; 
+select * from barraquinha;
+select * from feirinhas;
+select * from categoria_popular;
+select * from categoria_cientifica;
+select * from alimento;
 
 
 DROP TABLE IF EXISTS Conteudos_interface;
