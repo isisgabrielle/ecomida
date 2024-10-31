@@ -491,11 +491,13 @@ CREATE TABLE chat (
     id_pedidos BIGINT NOT NULL,
     mensagem VARCHAR(300) NOT NULL,
     data_envio DATE NOT NULL,
-    tipo_remetente VARCHAR (20) NOT NULL,
+    tipo_remetente VARCHAR (3) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
-    CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('C', 'A', 'ADM'))
+    CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('CON', 'AGR', 'ADM','ASS'))
 );
+
+COMMENT ON COLUMN chat.tipo_remetente IS 'CON significa consumidor, AGR significa agricultor, ADM significa administrador, ASS significa assistente social.';
 
 CREATE TABLE suporte (
     id_suporte BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('suporteid_seq'),
