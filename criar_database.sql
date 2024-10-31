@@ -664,10 +664,8 @@ CREATE TABLE correcao_estoque (
     id_correcao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('correcaoestoqueid_seq'),
     id_usuario BIGINT NOT NULL,
     id_barraquinha BIGINT NOT NULL,
-    data_insercao DATE NOT NULL,
-    hora_insercao TIMESTAMP NOT NULL,
-    data_alteracao DATE NOT NULL,
-    hora_alteracao TIMESTAMP NOT NULL,
+    data_hora_insercao TIMESTAMP NOT NULL,
+    data_hora_alteracao TIMESTAMP NOT NULL,
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinha(id_barraquinha),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)  	
 );
