@@ -254,6 +254,7 @@ COMMENT ON COLUMN usuario.tipo_vinculo IS 'CON significa consumidor, AGR signifi
 
 CREATE TABLE tipos_de_penalidade (
     id_tipo_penalidade BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('tipopenalidadeid_seq'),
+    nome_do_tipo VARCHAR(255) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     gravidade INT NOT NULL CHECK (gravidade BETWEEN 1 AND 5),
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
