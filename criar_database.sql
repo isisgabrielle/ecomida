@@ -469,7 +469,7 @@ CREATE TABLE avaliacoes (
     id_pedidos BIGINT NOT NULL,
     id_usuario BIGINT NOT NULL,
     avaliacao_barraquinha VARCHAR(1) NOT NULL,
-    data_avaliacao DATE,
+    data_hora_avaliacao TIMESTAMP NOT NULL,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
@@ -490,7 +490,7 @@ CREATE TABLE chat (
     id_chat BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('chatid_seq'),
     id_pedidos BIGINT NOT NULL,
     mensagem VARCHAR(300) NOT NULL,
-    data_envio DATE NOT NULL,
+    data_hora_envio TIMESTAMP NOT NULL,
     tipo_remetente VARCHAR (3) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
