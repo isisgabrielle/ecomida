@@ -570,14 +570,14 @@ CREATE TABLE estoque (
 
 CREATE TABLE cadastro_agricultor (
     id_cadastro_agricultor BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('cadastro_agricultorid_seq'), 
-    id_agricultor BIGINT NOT NULL,                
+    id_usuario BIGINT NOT NULL,                
     id_assistente_social BIGINT NOT NULL,         
     data_cadastro DATE NOT NULL,                 
     possui_registro BOOLEAN NOT NULL,
     registro_organico VARCHAR(256) NOT NULL,
     certificacoes VARCHAR (256) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_agricultor) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_assistente_social) REFERENCES usuario(id_usuario)
 );
 
