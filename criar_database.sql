@@ -293,7 +293,7 @@ COMMENT ON COLUMN barraquinhas.funcionamento_dia_da_semana IS 'as informações 
 
 CREATE TABLE feirinhas (
     id_feirinha BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('feirinhaid_seq'),
-    nome_feirinhas VARCHAR(256) NOT NULL,
+    nome_feirinha VARCHAR(256) NOT NULL,
     latitude DECIMAL(10, 8) NOT NULL,
     longitude DECIMAL(11, 8) NOT NULL,
     horario_funcionamento_inicio TIME NOT NULL,
