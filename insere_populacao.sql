@@ -8,19 +8,19 @@ VALUES
     (nextval('barraquinhaid_seq'), 2, 'Barraquinha da Maria', '33333333333', true, 'Praça Central', 5.50, true, false);
 
 
-INSERT INTO categorias_populares (id_categoria_popular, nome_categoria)
-VALUES (nextval('categoriapopularid_seq'), 'Frutas'),
-	   (nextval('categoriapopularid_seq'), 'Verduras'),
-	   (nextval('categoriapopularid_seq'), 'Laticínios');
+INSERT INTO categorias_populares (id_categoria_popular, nome_categoria,ativa)
+VALUES (nextval('categoriapopularid_seq'), 'Frutas',TRUE),
+	   (nextval('categoriapopularid_seq'), 'Verduras',TRUE),
+	   (nextval('categoriapopularid_seq'), 'Laticínios',TRUE);
 	   
-INSERT INTO categorias_cientificas (id_categoria_cientifica, nome_categoria)
-VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico'),
-       (nextval('categoriacientificaid_seq'), 'Proteico'),
-	   (nextval('categoriacientificaid_seq'), 'Energético');
+INSERT INTO categorias_cientificas (id_categoria_cientifica, nome_categoria,ativa)
+VALUES (nextval('categoriacientificaid_seq'), 'Vitamínico',TRUE),
+       (nextval('categoriacientificaid_seq'), 'Proteico',TRUE),
+	   (nextval('categoriacientificaid_seq'), 'Energético',TRUE);
 
-INSERT INTO alimentos (id_alimento, nome_alimento, id_categoria_popular, id_categoria_cientifica, classificacao_alimento, alimento_regional, informacoes_educativas, selo_inspecao)
-VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE),
-	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2,'NT',TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE);
+INSERT INTO alimentos (id_alimento, nome_alimento, id_categoria_popular, id_categoria_cientifica, classificacao_alimento, alimento_regional, informacoes_educativas, selo_inspecao,ativa)
+VALUES (nextval('alimentoid_seq'), 'Maçã', 1, 1, 'NT', FALSE, 'A maçã é uma fruta rica em nutrientes.', TRUE,TRUE),
+	   (nextval('alimentoid_seq'), 'Queijo Minas', 3, 2,'NT',TRUE, 'O queijo Minas é um produto lácteo tradicional brasileiro.', TRUE,TRUE);
        
 
 select * from usuarios; 
