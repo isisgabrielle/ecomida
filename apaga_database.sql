@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS imagens;
 DROP TABLE IF EXISTS produtos_pedidos;
 DROP TABLE IF EXISTS estoques;
 DROP TABLE IF EXISTS ecomidamarket;
+DROP TABLE IF EXISTS produtos_promocoes;
 DROP TABLE IF EXISTS promocoes;
 DROP TABLE IF EXISTS favoritos;
 DROP TABLE IF EXISTS avaliacoes;
@@ -34,6 +35,7 @@ DROP TABLE IF EXISTS medidas_padrao;
 DROP TABLE IF EXISTS usuarios;
 
 DROP SEQUENCE IF EXISTS conteudo_seq;
+DROP SEQUENCE IF EXISTS produtopromocaoid_seq;
 DROP SEQUENCE IF EXISTS penalidadeid_seq;
 DROP SEQUENCE IF EXISTS chatid_seq;
 DROP SEQUENCE IF EXISTS suporteid_seq;
