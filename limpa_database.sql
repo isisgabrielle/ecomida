@@ -9,6 +9,7 @@ TRUNCATE TABLE
     ecomidamarket,
     pedidos,
     promocoes,
+	produtos_promocoes,
     favoritos,
     avaliacoes,
     barraquinhas,
@@ -51,6 +52,7 @@ ALTER SEQUENCE produtoid_seq RESTART WITH 1;
 ALTER SEQUENCE imagemid_seq RESTART WITH 1;
 ALTER SEQUENCE pedidoid_seq RESTART WITH 1;
 ALTER SEQUENCE promocaoid_seq RESTART WITH 1;
+ALTER SEQUENCE produtopromocaoid_seq RESTART WITH 1;
 ALTER SEQUENCE ecomidamarketid_seq RESTART WITH 1;
 ALTER SEQUENCE enderecoid_seq RESTART WITH 1;
 ALTER SEQUENCE avaliacaoid_seq RESTART WITH 1;
@@ -68,4 +70,3 @@ ALTER SEQUENCE visitaid_seq RESTART WITH 1;
 ALTER SEQUENCE correcaoestoqueid_seq RESTART WITH 1;
 ALTER SEQUENCE tipodocid_seq RESTART WITH 1;
 ALTER SEQUENCE conteudo_seq RESTART WITH 1;
-
