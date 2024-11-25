@@ -96,6 +96,13 @@ CREATE SEQUENCE promocaoid_seq
     MAXVALUE 9223372036854775807
     START 1;
 
+CREATE SEQUENCE produtopromocaoid_seq
+    AS bigint
+    INCREMENT 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    START 1;
+	
 CREATE SEQUENCE ecomidamarketid_seq
     AS bigint
     INCREMENT 1
@@ -257,6 +264,7 @@ CREATE TABLE tipos_de_penalidades (
     nome_do_tipo VARCHAR(255) NOT NULL,
     descricao VARCHAR(100) NOT NULL,
     gravidade INT NOT NULL CHECK (gravidade BETWEEN 1 AND 5),
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -268,6 +276,7 @@ CREATE TABLE penalidades (
     id_tipo_penalidade BIGINT NOT NULL,
     data_penalidade DATE NOT NULL,
     descricao VARCHAR(255),
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_tipo_penalidade) REFERENCES tipos_de_penalidades(id_tipo_penalidade)
@@ -302,18 +311,21 @@ CREATE TABLE feirinhas (
     horario_final_de_semana_inicio TIME,
     horario_final_de_semana_fim TIME,
     dias_funcionamento VARCHAR(256) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     CONSTRAINT chk_dias_funcionamento CHECK (dias_funcionamento IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'))
 );
 
 CREATE TABLE categorias_populares (
     id_categoria_popular BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('categoriapopularid_seq'),
     nome_categoria VARCHAR(100) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE categorias_cientificas (
     id_categoria_cientifica BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('categoriacientificaid_seq'),
     nome_categoria VARCHAR(100) NOT NULL UNIQUE,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 COMMENT ON COLUMN categorias_cientificas.nome_categoria IS 'Nome da categoria científica. Deve ser único.';
@@ -372,6 +384,7 @@ CREATE TABLE alimentos (
     "POLI_22:6" DECIMAL(5, 2),
     "POLI_18:1t" DECIMAL(5, 2),
     "POLI_18:2t" DECIMAL(5, 2),
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoria_cientifica) REFERENCES categorias_cientificas(id_categoria_cientifica),
     FOREIGN KEY (id_categoria_popular) REFERENCES categorias_populares(id_categoria_popular),
@@ -387,6 +400,7 @@ CREATE TABLE subcategorias_populares (
     id_subcategoria_popular BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriapopularid_seq'),
     id_categoria_popular BIGINT NOT NULL,
     nome_sub VARCHAR(100) NOT NULL UNIQUE,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoria_popular) REFERENCES categorias_populares(id_categoria_popular)
 );
@@ -395,6 +409,7 @@ CREATE TABLE subcategorias_cientificas (
     id_subcategoria_cientifica BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('subcategoriacientificaid_seq'),
     id_categoria_cientifica BIGINT NOT NULL,
     nome_sub VARCHAR(100) NOT NULL UNIQUE,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_categoria_cientifica) REFERENCES categorias_cientificas(id_categoria_cientifica)
 );
@@ -407,6 +422,7 @@ CREATE TABLE produtos (
     id_subcategoria_popular BIGINT NOT NULL,
     id_subcategoria_cientifica BIGINT NOT NULL,
     id_barraquinha BIGINT NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_subcategoria_popular) REFERENCES subcategorias_populares(id_subcategoria_popular),
     FOREIGN KEY (id_subcategoria_cientifica) REFERENCES subcategorias_cientificas(id_subcategoria_cientifica),
@@ -420,6 +436,7 @@ CREATE TABLE imagens (
     id_usuario BIGINT NOT NULL,
     id_barraquinha BIGINT NOT NULL,
     id_produto BIGINT NOT NULL,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
@@ -428,7 +445,18 @@ CREATE TABLE imagens (
 CREATE TABLE pedidos (
     id_pedido BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('pedidoid_seq'),
     id_usuario BIGINT NOT NULL,
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	quantidade INT NOT NULL,
+    valor_quantidade decimal NOT NULL,
+    valor_embalagem decimal, 
+    valor_desconto decimal,
+    valor_total decimal NOT NULL,
+	ativa BOOLEAN NOT NULL,
+	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CHECK (quantidade >= 0), 
+    CHECK (valor_quantidade >= 0), 
+    CHECK (valor_embalagem >= 0), 
+    CHECK (valor_desconto >= 0), 
+    CHECK (valor_total >= 0), 
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
@@ -437,14 +465,23 @@ CREATE TABLE promocoes (
     id_produto BIGINT NOT NULL,
     desconto DECIMAL(5, 2) NOT NULL,
     validade DATE NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
 );
 
+CREATE TABLE produtos_promocoes(
+	id_produtopromocao BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('produtopromocaoid_seq'),
+	id_produto BIGINT NOT NULL,
+	id_promocao BIGINT NOT NULL,
+	FOREIGN KEY (id_produto) REFERENCES produtos(id_produto),
+	FOREIGN KEY (id_promocao) REFERENCES promocoes(id_promocao)
+);
 CREATE TABLE ecomidamarket (
     id_ecomidamarket BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('ecomidamarketid_seq'),
     id_usuario BIGINT NOT NULL,
     id_barraquinha BIGINT NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha)
@@ -460,6 +497,7 @@ CREATE TABLE enderecos (
     cidade VARCHAR(100) NOT NULL,
     estado CHAR(2) NOT NULL,
     cep CHAR(8) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
@@ -470,6 +508,7 @@ CREATE TABLE avaliacoes (
     id_usuario BIGINT NOT NULL,
     avaliacao_barraquinha VARCHAR(1) NOT NULL,
     data_hora_avaliacao TIMESTAMP NOT NULL,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     CONSTRAINT chk_avaliacao_barraquinha CHECK (avaliacao_barraquinha IN ('5', '4', '3', '2', '1'))
@@ -482,6 +521,7 @@ CREATE TABLE horarios_funcionamento (
     horario_fechamento TIME NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     dias_funcionamento VARCHAR(256) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     CONSTRAINT chk_dias_funcionamento CHECK (dias_funcionamento IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo')),
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha)
 );
@@ -493,6 +533,7 @@ CREATE TABLE chats (
     data_hora_envio TIMESTAMP NOT NULL,
     tipo_remetente VARCHAR (3) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
     CONSTRAINT chk_tipo_remetente CHECK (tipo_remetente IN ('CON', 'AGR', 'ADM','ASS'))
 );
@@ -507,6 +548,7 @@ CREATE TABLE suportes (
     descricao VARCHAR(300) NOT NULL,
     status_suporte VARCHAR(30) NOT NULL,
     data_resolucao DATE, 
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     CONSTRAINT chk_solicitacao CHECK (
@@ -532,6 +574,7 @@ CREATE TABLE favoritos (
     id_favorito BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('favoritoid_seq'),
     id_usuario BIGINT NOT NULL,
     id_produto BIGINT NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
@@ -541,17 +584,7 @@ CREATE TABLE produtos_pedidos (
     id_produto_pedido BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('produtopedidoid_seq'),
     id_produto BIGINT NOT NULL,
     id_pedido BIGINT NOT NULL,
-    quantidade INT NOT NULL,
-    valor_quantidade decimal NOT NULL,
-    valor_embalagem decimal, 
-    valor_desconto decimal,
-    valor_total decimal NOT NULL, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CHECK (quantidade >= 0), 
-    CHECK (valor_quantidade >= 0), 
-    CHECK (valor_embalagem >= 0), 
-    CHECK (valor_desconto >= 0), 
-    CHECK (valor_total >= 0), 
     foreign key (id_produto) references produtos(id_produto),
     foreign key (id_pedido) references pedidos(id_pedido)
  );
@@ -562,6 +595,7 @@ CREATE TABLE estoques (
     id_barraquinha BIGINT NOT NULL, 
     quantidade decimal NOT NULL,
     valor_quantidade decimal NOT NULL,
+	ativa BOOLEAN NOT NULL,
     CHECK (quantidade >= 0), 
     CHECK (valor_quantidade >= 0), 
     foreign key (id_produto) references produtos(id_produto),
@@ -576,6 +610,7 @@ CREATE TABLE cadastros_agricultores (
     possui_registro BOOLEAN NOT NULL,
     registro_organico VARCHAR(256) NOT NULL,
     certificacoes VARCHAR (256) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_assistente_social) REFERENCES usuarios(id_usuario)
@@ -586,6 +621,7 @@ CREATE TABLE medidas_padrao (
     nome VARCHAR(50) NOT NULL,
     unidade_medida VARCHAR(20) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
 );
@@ -597,6 +633,7 @@ CREATE TABLE medidas_caseiras (
     id_medida_padrao BIGINT NOT NULL,
     nome VARCHAR(50) NOT NULL,
     tipo VARCHAR(10) NOT NULL,
+	ativa BOOLEAN NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_medida_padrao) REFERENCES medidas_padrao(id_medida_padrao),
     CONSTRAINT chk_tipo_medida CHECK (tipo IN ('P', 'Vol', 'Cont', 'A'))
@@ -613,13 +650,15 @@ CREATE TABLE beneficiamentos (
     tratamentos TEXT NOT NULL,
     certificacoes_produto VARCHAR(256) NOT NULL,
     data_validade DATE NOT NULL,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha),
     FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)  	
 );
 
 CREATE TABLE tipos_documentos (
     id_tipo_doc BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('tipodocid_seq'),
-    nome_tipo VARCHAR(256) NOT NULL
+    nome_tipo VARCHAR(256) NOT NULL,
+	ativa BOOLEAN NOT NULL
 );
 
 CREATE TABLE documentos (
@@ -628,6 +667,7 @@ CREATE TABLE documentos (
     nome_documento VARCHAR(300) NOT NULL, 
     data_emisao DATE NOT NULL,
     data_validade DATE,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_tipo_doc) REFERENCES tipos_documentos(id_tipo_doc)  
 );
 
@@ -640,7 +680,8 @@ CREATE TABLE propriedades (
     foto_propriedade3 VARCHAR(256),                  
     descricao TEXT NOT NULL,                                     
     latitude NUMERIC(9, 6) NOT NULL,                            
-    longitude NUMERIC(9, 6) NOT NULL,                                                              
+    longitude NUMERIC(9, 6) NOT NULL,  
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_cadastro_agricultor) REFERENCES cadastros_agricultores(id_cadastro_agricultor),
     CHECK (latitude BETWEEN -90 AND 90),             
     CHECK (longitude BETWEEN -180 AND 180)            
@@ -653,7 +694,8 @@ CREATE TABLE visitacoes (
     aberta_visita BOOLEAN NOT NULL, 
     cobra_visita BOOLEAN NOT NULL,
     valor_visita DECIMAL NOT NULL, 
-    producao_anos INT NOT NULL,       
+    producao_anos INT NOT NULL,  
+	ativa BOOLEAN NOT NULL,
     CHECK (valor_visita >= 0), 
     CHECK (producao_anos >= 0), 
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha),
@@ -666,6 +708,7 @@ CREATE TABLE correcoes_estoque (
     id_barraquinha BIGINT NOT NULL,
     data_hora_insercao TIMESTAMP NOT NULL,
     data_hora_alteracao TIMESTAMP NOT NULL,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_barraquinha) REFERENCES barraquinhas(id_barraquinha),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)  	
 );
@@ -676,10 +719,12 @@ CREATE TABLE documentos_educativos (
     autor_doc VARCHAR(256) NOT NULL,
     foto_capa VARCHAR(256) NOT NULL,
     data_criacao DATE NOT NULL,
+	ativa BOOLEAN NOT NULL,
     FOREIGN KEY (id_tipo_doc) REFERENCES tipos_documentos(id_tipo_doc)  
 );
 
 CREATE TABLE conteudos_interface (
     id_conteudo BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('conteudo_seq'),
-    titulo VARCHAR(256) NOT NULL   
+    titulo VARCHAR(256) NOT NULL,
+	ativa BOOLEAN NOT NULL
 );
